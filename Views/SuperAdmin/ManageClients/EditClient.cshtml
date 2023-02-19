@@ -1,0 +1,29 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Add/Edit Counselor";
+    dynamic? selectedClient = TempData["selectedClient"];
+}
+<h1>Edit Client Status</h1>
+<form action="@Url.Action("EditClientStatus", "ManageClients")" method="post">
+    <div>
+        <input type="hidden" name="clientId" id="clientId" value="@selectedClient.CLIENT_ID" class="form-control">
+    </div>
+    <div>
+        <label>Status</label>
+        <select name="status" id="status">
+            @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+            {
+                if (status.ToString() == selectedClient.CLIENT_STATUS)
+                {
+                    <option value="@status" selected="selected">@status</option>
+                }
+                else
+                {
+                    <option value="@status">@status</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+

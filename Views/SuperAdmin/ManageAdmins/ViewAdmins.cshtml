@@ -1,0 +1,49 @@
+﻿@model IEnumerable<icounselvault.Models.Auth.User>
+@{
+    ViewData["Title"] = "View Admins";
+    int adminID = 0;
+}
+<body>
+    <h1>Manage Admins</h1>
+    <button>
+    @Html.ActionLink(
+    "Create Admin",
+    "ShowAddEditAdmin",
+    "ManageAdmins",
+    new { userId = 0, encryptedPassword = "-1"}
+    )
+    </button>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var admin in Model)
+            {
+                adminID = admin.USER_ID;
+                <tr>
+                    <th scope="row">@admin.USER_ID</th>
+                    <td>@admin.USERNAME</td>
+                    <td>********</td>
+                    <td>@admin.PRIVILEGE_TYPE</td>
+                    <td>@admin.USER_STATUS</td>
+                    <td>
+                    @Html.ActionLink(
+                    "Edit",                                                              // Text to be displayed
+                    "ShowAddEditAdmin",                                                  // Controller action
+                    "ManageAdmins",                                                      // Controller
+                    new { userId = admin.USER_ID, encryptedPassword = admin.PASSWORD}    // Parameters needed for the action
+                    )
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

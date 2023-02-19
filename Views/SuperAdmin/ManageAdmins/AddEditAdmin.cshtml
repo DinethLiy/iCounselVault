@@ -1,0 +1,90 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Add/Edit Admin";
+    dynamic? selectedAdmin = TempData["selectedAdmin"];
+    dynamic? decryptedPassword = TempData["decryptedPassword"];
+}
+@if(selectedAdmin == null) 
+{
+    <h1>Add Admin</h1>
+    @Html.ValidationSummary()
+    <form action="@Url.Action("AddAdmin", "ManageAdmins")" method="post">
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" id="username" placeholder="Username...">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="text" name="password" id="password" placeholder="Password...">
+        </div>
+        <div>
+            <label>Confirm Password</label>
+            <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password...">
+        </div>
+        <div>
+            <label>Type</label>
+            <select name="type" id="type">
+                @foreach (var adminType in Enum.GetValues(typeof(AppConstants.AdminTypes))) 
+                {
+                    <option value="@adminType">@adminType</option>
+                }
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+}
+else 
+{
+    <h1>Edit Admin</h1>
+    @Html.ValidationSummary()
+    <form action="@Url.Action("EditAdmin", "ManageAdmins")" method="post">
+        <div>
+            <input type="hidden" name="userId" id="userId" value="@selectedAdmin.USER_ID" class="form-control">
+        </div>
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" id="username" placeholder="Username..." value="@selectedAdmin.USERNAME">
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="text" name="password" id="password" placeholder="Password..." value="@decryptedPassword">
+        </div>
+        <div>
+            <label>Confirm Password</label>
+            <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password..." value="@decryptedPassword">
+        </div>
+        <div>
+            <label>Type</label>
+            <select name="type" id="type">
+                @foreach (var adminType in Enum.GetValues(typeof(AppConstants.AdminTypes))) 
+                {
+                    if (adminType.ToString() == selectedAdmin.PRIVILEGE_TYPE)
+                    {
+                        <option value="@adminType" selected="selected">@adminType</option>
+                    }
+                    else
+                    {
+                        <option value="@adminType">@adminType</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <label>Status</label>
+            <select name="status" id="status">
+                @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+                {
+                    if (status.ToString() == selectedAdmin.USER_STATUS)
+                    {
+                        <option value="@status" selected="selected">@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+}

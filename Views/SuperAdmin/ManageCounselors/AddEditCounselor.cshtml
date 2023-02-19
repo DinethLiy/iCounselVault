@@ -1,0 +1,129 @@
+﻿@using icounselvault.Utility
+@model IEnumerable<icounselvault.Models.Auth.User>
+@{
+    ViewData["Title"] = "Add/Edit Counselor";
+    dynamic? selectedUser = TempData["selectedUser"];
+    dynamic? decryptedPassword = TempData["decryptedPassword"];
+    dynamic? selectedCounselor = TempData["selectedCounselor"];
+    int userID = 0;
+}
+@if(selectedCounselor == null) 
+{
+    @if (selectedUser == null)
+    {
+        <h1>Add User for Counselor</h1>
+        @Html.ValidationSummary()
+        <form action="@Url.Action("AddCounselorUser", "ManageCounselors")" method="post">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username" id="username" placeholder="Username...">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="text" name="password" id="password" placeholder="Password...">
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password...">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    }
+    else
+    {
+        <h1>Edit Counselor Login Details</h1>
+        @Html.ValidationSummary()
+        <form action="@Url.Action("EditCounselorUser", "ManageCounselors")" method="post">
+            <div>
+                <input type="hidden" name="userId" id="userId" value="@selectedUser.USER_ID" class="form-control">
+            </div>
+            <div>
+                <label>Username</label>
+                <input type="text" name="username" id="username" placeholder="Username..." value="@selectedUser.USERNAME">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="text" name="password" id="password" placeholder="Password..." value="@decryptedPassword">
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password..." value="@decryptedPassword">
+            </div>
+            <div>
+                <label>Status</label>
+                <select name="status" id="status">
+                    @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+                    {
+                        if (status.ToString() == selectedUser.USER_STATUS)
+                        {
+                            <option value="@status" selected="selected">@status</option>
+                        }
+                        else
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    }
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    }
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                userID = user.USER_ID;
+                <tr>
+                    <th scope="row">@user.USER_ID</th>
+                    <td>@user.USERNAME</td>
+                    <td>********</td>
+                    <td>@user.USER_STATUS</td>
+                    <td>
+                        @Html.ActionLink(
+                        "Edit",                                                             
+                        "ShowAddEditCounselorUser",
+                        "ManageCounselors",                                                    
+                        new { userId = user.USER_ID, encryptedPassword = user.PASSWORD}    
+                        )
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else 
+{
+    <h1>Edit Counselor Status</h1>
+    <form action="@Url.Action("EditCounselorStatus", "ManageCounselors")" method="post">
+        <div>
+            <input type="hidden" name="counselorId" id="counselorId" value="@selectedCounselor.COUNSELOR_ID" class="form-control">
+        </div>
+        <div>
+            <label>Status</label>
+            <select name="status" id="status">
+                @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+                {
+                    if (status.ToString() == selectedCounselor.COUNSELOR_STATUS)
+                    {
+                        <option value="@status" selected="selected">@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+}
