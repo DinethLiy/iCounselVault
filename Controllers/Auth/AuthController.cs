@@ -48,6 +48,10 @@ namespace icounselvault.Controllers.Auth
                 {
                     return View("../../Views/Dashboard/SuperAdminDashboard");
                 }
+                else if (role == "ADMIN") 
+                {
+                    return View("../../Views/Dashboard/AdminDashboard");
+                }
                 else
                 {
                     return View("../../Views/Dashboard/ClientDashboard");

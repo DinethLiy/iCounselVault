@@ -8,10 +8,17 @@
             ADMIN
         }
 
-        public enum Statuses 
+        public enum MainStatuses 
         {
             ACT,
             INA
+        }
+
+        public enum RequestStatuses 
+        {
+            ACCEPTED,
+            PENDING,
+            REJECTED
         }
     }
 }

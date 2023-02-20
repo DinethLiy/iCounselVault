@@ -1,0 +1,51 @@
+﻿@model IEnumerable<icounselvault.Models.Counseling.CounselDataInsertRequest>
+@{
+    ViewData["Title"] = "View Clients";
+    int insertRequestID = 0;
+    bool isExternal = false;
+}
+<body>
+    <h1>Manage Guidance Insert Requests</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Client</th>
+                <th scope="col">Counselor</th>
+                <th scope="col">External Source</th>
+                <th scope="col">Guidance Advice</th>
+                <th scope="col">Satisfaction</th>
+                <th scope="col">Status</th>
+                <th scope="col">Remark</th>
+                <th scope="col">Created Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var insertRequest in Model)
+            {
+                @(insertRequest.counselor != null ? isExternal = false : isExternal = true)
+                insertRequestID = insertRequest.COUNSEL_DATA_INSERT_REQUEST_ID;
+                <tr>
+                    <th scope="row">@insertRequest.COUNSEL_DATA_INSERT_REQUEST_ID</th>
+                    <td>@insertRequest.client.NAME</td>
+                    <td>@(isExternal ? null : insertRequest.counselor.NAME)</td>
+                    <td>@insertRequest.clientGuidanceHistory.EXTERNAL_GUIDANCE_SOURCE</td>
+                    <td>@insertRequest.clientGuidanceHistory.GUIDANCE_ADVICE</td>
+                    <td>@insertRequest.clientGuidanceHistory.CLIENT_SATISFACTION</td>
+                    <td>@insertRequest.INSERT_REQUEST_STATUS</td>
+                    <td>@insertRequest.INSERT_REQUEST_REMARK</td>
+                    <td>@insertRequest.CREATED_DATE</td>
+                    <td>
+                        @Html.ActionLink(
+                    "Update",
+                    "ShowEditInsertRequest",
+                    "ManageInsertRequests",
+                    new { insertRequestID = insertRequestID }
+                    )
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

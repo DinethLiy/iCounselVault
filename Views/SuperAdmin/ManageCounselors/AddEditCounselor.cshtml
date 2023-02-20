@@ -52,7 +52,7 @@
             <div>
                 <label>Status</label>
                 <select name="status" id="status">
-                    @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+                    @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
                     {
                         if (status.ToString() == selectedUser.USER_STATUS)
                         {
@@ -111,7 +111,7 @@ else
         <div>
             <label>Status</label>
             <select name="status" id="status">
-                @foreach (var status in Enum.GetValues(typeof(AppConstants.Statuses)))
+                @foreach (var status in Enum.GetValues(typeof(AppConstants.MainStatuses)))
                 {
                     if (status.ToString() == selectedCounselor.COUNSELOR_STATUS)
                     {

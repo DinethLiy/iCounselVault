@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using icounselvault.Utility;
 
@@ -10,9 +11,11 @@ using icounselvault.Utility;
 namespace icounselvault.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230220044120_Create-GuidanceHistory_table")]
+    partial class CreateGuidanceHistory_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,9 +255,6 @@ namespace icounselvault.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CREATED_DATE")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<int>("Client")
                         .HasColumnType("int");
 
@@ -279,79 +279,6 @@ namespace icounselvault.Migrations
                     b.HasIndex("Counselor");
 
                     b.ToTable("CLIENT_GUIDANCE_HISTORY");
-                });
-
-            modelBuilder.Entity("icounselvault.Models.Counseling.CounselDataInsertRequest", b =>
-                {
-                    b.Property<int>("COUNSEL_DATA_INSERT_REQUEST_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CREATED_DATE")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Client")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientGuidanceHistory")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Counselor")
-                        .HasColumnType("int");
-
-                    b.Property<string>("INSERT_REQUEST_REMARK")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("INSERT_REQUEST_STATUS")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("COUNSEL_DATA_INSERT_REQUEST_ID");
-
-                    b.HasIndex("Client");
-
-                    b.HasIndex("ClientGuidanceHistory");
-
-                    b.HasIndex("Counselor");
-
-                    b.ToTable("COUNSEL_DATA_INSERT_REQUEST");
-                });
-
-            modelBuilder.Entity("icounselvault.Models.Counseling.CounselRequest", b =>
-                {
-                    b.Property<int>("COUNSEL_REQUEST_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("COUNSEL_REQUEST_REMARK")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("COUNSEL_REQUEST_STATUS")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CREATED_DATE")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Client")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Counselor")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FROM_DATE")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("TO_DATE")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("COUNSEL_REQUEST_ID");
-
-                    b.HasIndex("Client");
-
-                    b.HasIndex("Counselor");
-
-                    b.ToTable("COUNSEL_REQUEST");
                 });
 
             modelBuilder.Entity("icounselvault.Models.Profiles.Client", b =>
@@ -572,50 +499,6 @@ namespace icounselvault.Migrations
                     b.HasOne("icounselvault.Models.Profiles.Counselor", "counselor")
                         .WithMany()
                         .HasForeignKey("Counselor");
-
-                    b.Navigation("client");
-
-                    b.Navigation("counselor");
-                });
-
-            modelBuilder.Entity("icounselvault.Models.Counseling.CounselDataInsertRequest", b =>
-                {
-                    b.HasOne("icounselvault.Models.Profiles.Client", "client")
-                        .WithMany()
-                        .HasForeignKey("Client")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("icounselvault.Models.Counseling.ClientGuidanceHistory", "clientGuidanceHistory")
-                        .WithMany()
-                        .HasForeignKey("ClientGuidanceHistory")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("icounselvault.Models.Profiles.Counselor", "counselor")
-                        .WithMany()
-                        .HasForeignKey("Counselor");
-
-                    b.Navigation("client");
-
-                    b.Navigation("clientGuidanceHistory");
-
-                    b.Navigation("counselor");
-                });
-
-            modelBuilder.Entity("icounselvault.Models.Counseling.CounselRequest", b =>
-                {
-                    b.HasOne("icounselvault.Models.Profiles.Client", "client")
-                        .WithMany()
-                        .HasForeignKey("Client")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("icounselvault.Models.Profiles.Counselor", "counselor")
-                        .WithMany()
-                        .HasForeignKey("Counselor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("client");
 

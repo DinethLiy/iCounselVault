@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using icounselvault.Utility;
 
@@ -10,9 +11,11 @@ using icounselvault.Utility;
 namespace icounselvault.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230220060517_update_foreignKey_v2")]
+    partial class update_foreignKey_v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,17 +290,14 @@ namespace icounselvault.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CLIENT_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("COUNSELOR_ID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CREATED_DATE")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Client")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClientGuidanceHistory")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Counselor")
-                        .HasColumnType("int");
 
                     b.Property<string>("INSERT_REQUEST_REMARK")
                         .HasColumnType("longtext");
@@ -306,13 +306,16 @@ namespace icounselvault.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("clientGuidanceHistoryCLIENT_GUIDANCE_HISTORY_ID")
+                        .HasColumnType("int");
+
                     b.HasKey("COUNSEL_DATA_INSERT_REQUEST_ID");
 
-                    b.HasIndex("Client");
+                    b.HasIndex("CLIENT_ID");
 
-                    b.HasIndex("ClientGuidanceHistory");
+                    b.HasIndex("COUNSELOR_ID");
 
-                    b.HasIndex("Counselor");
+                    b.HasIndex("clientGuidanceHistoryCLIENT_GUIDANCE_HISTORY_ID");
 
                     b.ToTable("COUNSEL_DATA_INSERT_REQUEST");
                 });
@@ -582,19 +585,19 @@ namespace icounselvault.Migrations
                 {
                     b.HasOne("icounselvault.Models.Profiles.Client", "client")
                         .WithMany()
-                        .HasForeignKey("Client")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("icounselvault.Models.Counseling.ClientGuidanceHistory", "clientGuidanceHistory")
-                        .WithMany()
-                        .HasForeignKey("ClientGuidanceHistory")
+                        .HasForeignKey("CLIENT_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("icounselvault.Models.Profiles.Counselor", "counselor")
                         .WithMany()
-                        .HasForeignKey("Counselor");
+                        .HasForeignKey("COUNSELOR_ID");
+
+                    b.HasOne("icounselvault.Models.Counseling.ClientGuidanceHistory", "clientGuidanceHistory")
+                        .WithMany()
+                        .HasForeignKey("clientGuidanceHistoryCLIENT_GUIDANCE_HISTORY_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("client");
 
