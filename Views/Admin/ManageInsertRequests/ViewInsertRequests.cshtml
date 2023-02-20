@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<icounselvault.Models.Counseling.CounselDataInsertRequest>
 @{
-    ViewData["Title"] = "View Clients";
+    ViewData["Title"] = "View Insert Requests";
     int insertRequestID = 0;
     bool isExternal = false;
 }
@@ -24,7 +24,14 @@
         <tbody>
             @foreach (var insertRequest in Model)
             {
-                @(insertRequest.counselor != null ? isExternal = false : isExternal = true)
+                @if (insertRequest.counselor != null)
+                {
+                    isExternal = false;
+                }
+                else
+                {
+                    isExternal = true;   
+                }
                 insertRequestID = insertRequest.COUNSEL_DATA_INSERT_REQUEST_ID;
                 <tr>
                     <th scope="row">@insertRequest.COUNSEL_DATA_INSERT_REQUEST_ID</th>
@@ -41,7 +48,7 @@
                     "Update",
                     "ShowEditInsertRequest",
                     "ManageInsertRequests",
-                    new { insertRequestID = insertRequestID }
+                    new { insertRequestId = insertRequestID }
                     )
                     </td>
                 </tr>

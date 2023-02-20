@@ -1,5 +1,37 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using icounselvault.Utility
 @{
+    ViewData["Title"] = "Edit Insert Request";
+    dynamic? selectedInsertRequest = TempData["selectedInsertRequest"];
 }
+<h1>Edit Insert Request</h1>
+<form action="@Url.Action("EditInsertRequest", "ManageInsertRequests")" method="post">
+    @Html.ValidationSummary()
+    <div>
+        <input type="hidden" name="insertRequestId" id="insertRequestId" value="@selectedInsertRequest.COUNSEL_DATA_INSERT_REQUEST_ID" class="form-control">
+    </div>
+    <div>
+        <label>Guidance Advice</label>
+        <input type="text" name="guidanceAdvice" id="guidanceAdvice" value="@selectedInsertRequest.clientGuidanceHistory.GUIDANCE_ADVICE">
+    </div>
+    <div>
+        <label>Status</label>
+        <select name="status" id="status">
+            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses)))
+            {
+                if (status.ToString() == selectedInsertRequest.INSERT_REQUEST_STATUS)
+                {
+                            <option value="@status" selected="selected">@status</option>
+                }
+                else
+                {
+                            <option value="@status">@status</option>
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <label>Remark</label>
+        <input type="text" name="remark" id="remark" value="@selectedInsertRequest.INSERT_REQUEST_REMARK">
+    </div>
+    <button type="submit">Submit</button>
+</form>

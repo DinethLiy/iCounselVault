@@ -1,5 +1,4 @@
 ﻿using icounselvault.Models.Auth;
-using icounselvault.Models.Profiles;
 using icounselvault.Utility;
 using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;

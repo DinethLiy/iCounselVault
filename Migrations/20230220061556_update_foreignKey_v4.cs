@@ -23,34 +23,34 @@ namespace icounselvault.Migrations
                 table: "COUNSEL_DATA_INSERT_REQUEST");*/
 
             migrationBuilder.RenameColumn(
-                name: "clientGuidanceHistoryCLIENT_GUIDANCE_HISTORY_ID",
+                name: "ClientGuidanceHistory",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
                 newName: "ClientGuidanceHistory");
 
             migrationBuilder.RenameColumn(
-                name: "COUNSELOR_ID",
+                name: "Counselor",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
                 newName: "Counselor");
 
             migrationBuilder.RenameColumn(
-                name: "CLIENT_ID",
+                name: "Client",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
                 newName: "Client");
 
-            migrationBuilder.RenameIndex(
+            /*migrationBuilder.RenameIndex(
                 name: "IX_COUNSEL_DATA_INSERT_REQUEST_COUNSELOR_ID",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
-                newName: "IX_COUNSEL_DATA_INSERT_REQUEST_Counselor");
+                newName: "IX_COUNSEL_DATA_INSERT_REQUEST_Counselor");*/
 
             /*migrationBuilder.RenameIndex(
                 name: "IX_COUNSEL_DATA_INSERT_REQUEST_clientGuidanceHistoryCLIENT_GUID~",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
                 newName: "IX_COUNSEL_DATA_INSERT_REQUEST_ClientGuidanceHistory");*/
 
-            migrationBuilder.RenameIndex(
+            /*migrationBuilder.RenameIndex(
                 name: "IX_COUNSEL_DATA_INSERT_REQUEST_CLIENT_ID",
                 table: "COUNSEL_DATA_INSERT_REQUEST",
-                newName: "IX_COUNSEL_DATA_INSERT_REQUEST_Client");
+                newName: "IX_COUNSEL_DATA_INSERT_REQUEST_Client");*/
 
             migrationBuilder.AddForeignKey(
                 name: "FK_COUNSEL_DATA_INSERT_REQUEST_CLIENT_Client",

@@ -30,5 +30,10 @@ namespace icounselvault.Controllers.Dashboard
         {
             return RedirectToAction("ViewInsertRequests", "ManageInsertRequests");
         }
+
+        public RedirectToActionResult ShowCounselRequests()
+        {
+            return RedirectToAction("ViewCounselRequests", "ManageCounselRequests");
+        }
     }
 }
