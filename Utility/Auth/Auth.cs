@@ -19,8 +19,8 @@ namespace icounselvault.Utility.Auth
             // Set Claims for Token
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.USERNAME),
-                new Claim(ClaimTypes.Role, user.PRIVILEGE_TYPE)
+                new Claim(ClaimTypes.Role, user.PRIVILEGE_TYPE),
+                new Claim("UserId", user.USER_ID.ToString())
             };
 
             // 1. Create Security Token Handler
