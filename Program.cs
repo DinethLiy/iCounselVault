@@ -5,6 +5,7 @@ using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddSingleton<IJwtAuth>(new Auth(key));
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
 
 // Add services to the app
 var app = builder.Build();

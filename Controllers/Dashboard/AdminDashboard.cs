@@ -13,7 +13,7 @@ namespace icounselvault.Controllers.Dashboard
 
         public IActionResult Index()
         {
-            return View("../../Views/Dashboard/SuperAdminDashboard");
+            return View("../../Views/Dashboard/AdminDashboard");
         }
 
         public RedirectToActionResult ShowCounselors()

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Edit Profile";
+    dynamic? loggedInClient = TempData["loggedInClient"];
+}
+<h1>Edit Profile</h1>
+<form action="@Url.Action("EditClient", "ClientProfile")" method="post">
+    <div>
+        <label>Full Name</label>
+        <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInClient.NAME">
+    </div>
+    <div>
+        <label>Date of Birth: @loggedInClient.DOB</label><br>
+        <label>This cannot be edited</label>
+    </div>
+    <div>
+        <label>Gender</label>
+        <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." value="@loggedInClient.GENDER">
+    </div>
+    <div>
+        <label>NIC: @loggedInClient.NIC</label><br>
+        <label>This cannot be edited</label>
+    </div>
+    <div>
+        <label>Main Address</label>
+        <input type="text" name="Address" id="Address" placeholder="Your Address.." value="@loggedInClient.ADDRESS">
+    </div>
+    <div>
+        <label>Country</label>
+        <input type="text" name="Country" id="Country" placeholder="Your Country.." value="@loggedInClient.COUNTRY">
+    </div>
+    <div>
+        <label>Contact Number</label>
+        <input type="text" name="Contact" id="Contact" placeholder="Your Contact Number.." value="@loggedInClient.CONTACT_NUM">
+    </div>
+    <div>
+        <label>Email Address</label>
+        <input type="Email" name="Email" id="email" placeholder="Your Email.." value="@loggedInClient.EMAIL">
+    </div>
+    <label>Your contact details will only be shared with Counsellors that you request guidance from.</label><br>
+    <button type="submit">Submit</button>
+</form>

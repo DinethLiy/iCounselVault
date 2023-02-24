@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Your Profile";
+    dynamic? loggedInClient = TempData["loggedInClient"];
+}
+<h1>Profile Details</h1>
+<div>
+    <div>
+        <label>Name: @loggedInClient.NAME</label>
+    </div><br>
+    <div>
+        <label>Date of Birth: @loggedInClient.DOB</label>
+    </div><br>
+    <div>
+        <label>Gender: @loggedInClient.GENDER</label>
+    </div><br>
+    <div>
+        <label>NIC: @loggedInClient.NIC</label>
+    </div><br>
+    <div>
+        <label>Primary Address: @loggedInClient.ADDRESS</label>
+    </div><br>
+    <div>
+        <label>Country: @loggedInClient.COUNTRY</label>
+    </div><br>
+    <div>
+        <label>Contact Number: @loggedInClient.CONTACT_NUM</label>
+    </div><br>
+    <div>
+        <label>Email: @loggedInClient.EMAIL</label>
+    </div><br>
+    <a asp-controller="ClientProfile" asp-action="ShowEditClientProfile">Edit</a>
+</div>

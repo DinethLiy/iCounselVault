@@ -1,4 +1,5 @@
 ﻿using icounselvault.Models.Auth;
+using icounselvault.Models.Profiles;
 using icounselvault.Utility;
 using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
@@ -39,10 +40,7 @@ namespace icounselvault.Controllers.Auth
 
             if (foundAccount != null) 
             {
-                var token = _jwtAuth.Authentication(foundAccount);
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var jwtToken = tokenHandler.ReadJwtToken(token);
-                string? role = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value.ToString();
+                string? role = LoggedInUserAuthentication(foundAccount);
                 return View(RedirectToDashboard(foundAccount, role));
             }            
             else 
@@ -50,6 +48,23 @@ namespace icounselvault.Controllers.Auth
                 ModelState.AddModelError("", "Invalid username or password");
                 return View("Login");
             }
+        }
+
+        public string? LoggedInUserAuthentication(User foundAccount) 
+        {
+            var token = _jwtAuth.Authentication(foundAccount);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            string? role = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value.ToString();
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true, // only transmit over HTTPS
+                SameSite = SameSiteMode.Strict, // prevent CSRF attacks
+                Expires = DateTime.UtcNow.AddHours(1)
+            };
+            Response.Cookies.Append("access_token", token, cookieOptions);
+            return role;
         }
 
         public string RedirectToDashboard(User foundAccount, string? role)
@@ -84,7 +99,59 @@ namespace icounselvault.Controllers.Auth
             }
             else
             {
-                return "../../Views/Counselor/CounselorProfile/CounselorEditProfile";
+                return "../../Views/Counselor/CounselorProfile/EditCounselorProfile";
+            }
+        }
+
+        public IActionResult ShowClientRegister() 
+        {
+            return View("../../Views/Auth/ClientRegister");
+        }
+
+        [HttpPost]
+        public IActionResult AddClient(string Username, string Password, string ConfirmPassword, string Name, string DateOfBirth, string Gender, string NIC, string Address, string Country, string Contact, string Email) 
+        {
+            EncryptDecryptText encryptDecryptText = new();
+            if (Username != null && Password != null && ConfirmPassword == Password)
+            {
+                //Create new client-user
+                User newClientUser = new()
+                {
+                    USERNAME = Username,
+                    PASSWORD = encryptDecryptText.EncryptText(Password),
+                    PRIVILEGE_TYPE = "CLIENT",
+                    USER_STATUS = "ACT"
+                };
+                _context.USER.Add(newClientUser);
+                _context.SaveChanges();
+                //Get created client-user
+                var createdClient = _context.USER
+                    .OrderByDescending(u => u.USER_ID)
+                    .FirstOrDefault();
+                //Create new Client
+                icounselvault.Models.Profiles.Client newClient = new()
+                {
+                    user = createdClient,
+                    CLIENT_CODE = Guid.NewGuid(),
+                    NAME = Name,
+                    DOB = DateTime.Parse(DateOfBirth),
+                    GENDER = Gender,
+                    NIC = NIC,
+                    ADDRESS = Address,
+                    COUNTRY = Country,
+                    CONTACT_NUM = Contact,
+                    EMAIL= Email,
+                    CLIENT_STATUS = "ACT"
+                };
+                _context.CLIENT.Add(newClient);
+                _context.SaveChanges();
+                ModelState.AddModelError("", "Succesfully created a new Account! Please Log in");
+                return View("../../Views/Auth/Login");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Error, Please enter valid values into the fields.");
+                return View("../../Views/Auth/ClientRegister");
             }
         }
     }
