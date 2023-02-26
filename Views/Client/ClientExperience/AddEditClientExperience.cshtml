@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Add/Edit Past Experiences";
+    dynamic? clientExperience = TempData["clientExperience"];
+}
+@if (clientExperience != null)
+{
+    <h1>Edit Past Experiences</h1>
+    <form action="@Url.Action("EditClientExperience", "ClientExperience")" method="post">
+        <div>
+            <label>School Experience</label>
+            <input type="text" name="School" id="School" placeholder="School Experience.." value="@clientExperience.SCHOOL_EXPERIENCE">
+        </div>
+        <div>
+            <label>Higher Education</label>
+            <input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education.." value="@clientExperience.HIGHER_EDU_EXPERIENCE">
+        </div>
+        <div>
+            <label>Job Experience</label>
+            <input type="text" name="Career" id="Career" placeholder="Job Experience.." value="@clientExperience.JOB_EXPERIENCE">
+        </div>
+        <div>
+            <label>Preferred Career Field</label>
+            <input type="text" name="PreferredCareer" id="PreferredCareer" placeholder="Prefered Career Field.." value="@clientExperience.PREFERED_CAREER_FIELD">
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+}
+else
+{
+    <h1>Add Past Experiences</h1>
+    @Html.ValidationSummary()
+    <form action="@Url.Action("AddClientExperience", "ClientExperience")" method="post">
+        <div>
+            <label>School Experience</label>
+            <input type="text" name="School" id="School" placeholder="School Experience..">
+        </div>
+        <div>
+            <label>Higher Education</label>
+            <input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education..">
+        </div>
+        <div>
+            <label>Job Experience</label>
+            <input type="text" name="Career" id="Career" placeholder="Job Experience..">
+        </div>
+        <div>
+            <label>Prefered Career Field</label>
+            <input type="text" name="PreferredCareer" id="PreferredCareer" placeholder="Prefered Career Field..">
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+}

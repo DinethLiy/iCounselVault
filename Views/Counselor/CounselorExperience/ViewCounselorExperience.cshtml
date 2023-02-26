@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Your Past Experiences";
+    dynamic? counselorExperience = TempData["counselorExperience"];
+}
+<h1>Past Experiences</h1>
+<div>
+    <div>
+        <label>School Experience: @counselorExperience.SCHOOL_EXPERIENCE</label>
+    </div><br>
+    <div>
+        <label>Higher Education: @counselorExperience.HIGHER_EDU_EXPERIENCE</label>
+    </div><br>
+    <div>
+        <label>Career: @counselorExperience.JOB_EXPERIENCE</label>
+    </div><br>
+    <a asp-controller="CounselorExperience" asp-action="ShowEditCounselorExperience">Edit</a>
+</div>

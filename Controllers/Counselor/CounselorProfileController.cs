@@ -87,5 +87,10 @@ namespace icounselvault.Controllers.Counselor
                 .FirstOrDefault();
             TempData["loggedInCounselor"] = counselor;
         }
+
+        public RedirectToActionResult ShowCounselorExperience()
+        {
+            return RedirectToAction("ShowCounselorExperience", "CounselorExperience");
+        }
     }
 }

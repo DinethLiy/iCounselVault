@@ -56,5 +56,10 @@ namespace icounselvault.Controllers.Client
                 .FirstOrDefault();
             TempData["loggedInClient"] = client;
         }
+
+        public RedirectToActionResult ShowClientExperience() 
+        {
+            return RedirectToAction("ShowClientExperience", "ClientExperience");
+        }
     }
 }
