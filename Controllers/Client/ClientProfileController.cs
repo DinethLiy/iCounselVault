@@ -51,7 +51,7 @@ namespace icounselvault.Controllers.Client
             var jwtToken = tokenHandler.ReadJwtToken(token);
             string? userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value.ToString();
             client = _context.CLIENT
-            .Include(cl => cl.user)
+                .Include(cl => cl.user)
                 .Where(cl => cl.user.USER_ID == int.Parse(userId))
                 .FirstOrDefault();
             TempData["loggedInClient"] = client;

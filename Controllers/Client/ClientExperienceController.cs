@@ -32,7 +32,7 @@ namespace icounselvault.Controllers.Client
         [HttpPost]
         public IActionResult AddClientExperience(string School, string HigherEducation, string Career, string PreferredCareer)
         {
-            setClient();
+            SetClient();
             //Create new Client Experience
             ClientExperience newClientExp = new()
             {
@@ -70,7 +70,7 @@ namespace icounselvault.Controllers.Client
             return View("../../Views/Client/ClientExperience/ViewClientExperience");
         }
 
-        public void setClient() 
+        public void SetClient() 
         {
             var token = Request.Cookies["access_token"];
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -84,7 +84,7 @@ namespace icounselvault.Controllers.Client
 
         public void SetTempDataForClientExperience()
         {
-            setClient();
+            SetClient();
             clientExperience = _context.CLIENT_EXPERIENCE
                 .Include(cle => cle.client)
                 .Where(cle => cle.client.CLIENT_ID == foundClient.CLIENT_ID)

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Create Counsel Request";
+    dynamic? counselor = TempData["counselor"];
+}
+<h1>Create Counsel Request</h1>
+@Html.ValidationSummary()
+<form action="@Url.Action("AddCounselRequest", "ClientCounselRequests")" method="post">
+    <input type="hidden" name="counselorId" id="counselorId" value="@counselor.COUNSELOR_ID">
+    <div><label>Counselor: @counselor.NAME</label></div>
+    <div><label>Date of Birth: @counselor.DOB</label></div>
+    <div><label>Gender: @counselor.GENDER</label></div>
+    <div><label>Country: @counselor.COUNTRY</label></div>
+    <div><label>Contact Number: @counselor.CONTACT_NUM</label></div>
+    <div><label>Email: @counselor.EMAIL</label></div>
+
+    <div>
+        <label>Start Date of Possible Date Range for Counselling</label>
+        <input type="date" name="StartDate" id="StartDate">
+    </div>
+    <div>
+        <label>End Date of Possible Date Range for Counselling</label>
+        <input type="date" name="EndDate" id="EndDate">
+    </div>
+    <label>You may provide the same date as the Starting Date and Ending Date</label>
+    
+    <button type="submit">Create</button>
+</form>

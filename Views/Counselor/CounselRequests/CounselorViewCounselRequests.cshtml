@@ -1,0 +1,47 @@
+﻿@model IEnumerable<icounselvault.Models.Counseling.CounselRequest>
+@{
+    ViewData["Title"] = "View Counsel Requests";
+    int counselRequestID = 0;
+}
+<body>
+    <h1>View Counseling Requests</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Client</th>
+                <th scope="col">From Date</th>
+                <th scope="col">To Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Remark</th>
+                <th scope="col">Created Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var counselRequest in Model)
+            {
+                counselRequestID = counselRequest.COUNSEL_REQUEST_ID;
+                    <tr>
+                        <td>@counselRequest.client.NAME</td>
+                        <td>@counselRequest.FROM_DATE</td>
+                        <td>@counselRequest.TO_DATE</td>
+                        <td>@counselRequest.COUNSEL_REQUEST_STATUS</td>
+                        <td>@counselRequest.COUNSEL_REQUEST_REMARK</td>
+                        <td>@counselRequest.CREATED_DATE</td>
+                        @if(counselRequest.COUNSEL_REQUEST_STATUS == "PENDING") 
+                        {
+                            <td>
+                            @Html.ActionLink(
+                            "Manage",
+                            "ShowEditCounselRequest",
+                            "CounselorCounselRequests",
+                            new { counselRequestID = counselRequestID }
+                            )
+                            </td>
+                        }
+                        
+                    </tr>
+            }
+        </tbody>
+    </table>
+</body>

@@ -1,0 +1,30 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Manage Counsel Request";
+    dynamic? counselRequest = TempData["counselRequest"];
+}
+<h1>Manage Counsel Request</h1>
+@Html.ValidationSummary()
+<form action="@Url.Action("EditCounselRequest", "CounselorCounselRequests")" method="post">
+    <input type="hidden" name="counselRequestId" id="counselRequestId" value="@counselRequest.COUNSEL_REQUEST_ID">
+    <div><label>Client: @counselRequest.client.NAME</label></div>
+    <div><label>Country: @counselRequest.client.COUNTRY</label></div>
+    <div><label>Contact Number: @counselRequest.client.CONTACT_NUM</label></div>
+    <div><label>Email: @counselRequest.client.EMAIL</label></div>
+
+    <div>
+        <label>Status</label>
+        <select name="Status" id="Status">
+            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses))) 
+            {
+                <option value="@status">@status</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Remark (Optional)</label>
+        <input type="text" name="Remark" id="Remark" placeholder="Say Something About This Request...">
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
