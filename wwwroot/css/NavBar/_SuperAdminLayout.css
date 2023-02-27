@@ -1,0 +1,7 @@
+﻿.navbar.bg-light {
+    background-color: #D1ECF1 !important;
+}
+
+.navbar.bg-light .form-control {
+    border-radius: 4.25rem;
+}

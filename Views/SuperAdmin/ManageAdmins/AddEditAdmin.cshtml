@@ -1,6 +1,7 @@
 ﻿@using icounselvault.Utility
 @{
     ViewData["Title"] = "Add/Edit Admin";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
     dynamic? selectedAdmin = TempData["selectedAdmin"];
     dynamic? decryptedPassword = TempData["decryptedPassword"];
 }

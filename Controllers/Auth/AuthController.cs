@@ -26,7 +26,7 @@ namespace icounselvault.Controllers.Auth
         }
 
         [HttpPost]
-        public IActionResult Index(string username, string password)
+        public IActionResult Login(string username, string password)
         {
             EncryptDecryptText encryptDecryptText = new();
             string encryptedPassword = "";

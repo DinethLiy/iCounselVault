@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<icounselvault.Models.Profiles.Counselor>
 @{
     ViewData["Title"] = "Find a Counselor";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
     dynamic? counselRequest = TempData["counselRequest"];
     int counselorID = 0;
 }

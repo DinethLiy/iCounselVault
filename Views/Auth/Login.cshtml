@@ -1,23 +1,33 @@
 ﻿@{
     Layout = null;
+    ViewData["Title"] = "Login";
 }
 <head>
-    <title>Login</title>
+    <link rel="stylesheet" href="~/css/Auth/Login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - iCounselVault</title>
 </head>
-<body>
-    @Html.ValidationSummary()
-    <div>
-    <form method="post">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username" id="username">
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <button type="submit">Login</button>
-    </form>
+<div class="wrapper">
+    <div class="logo">
+        <img src="~/img/logo-high-res.png" alt="iCounselVault Logo">
     </div>
-    <a asp-controller="Auth" asp-action="ShowClientRegister">Create an Account</a>
-</body>
+    <div class="text-center mt-4 name">
+        iCounselVault
+    </div>
+    @Html.ValidationSummary()
+    <form class="p-3 mt-3" action="@Url.Action("Login", "Auth")" method="post">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="username" id="username" placeholder="Username">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <button class="btn mt-3" type="submit">Login</button>
+    </form>
+
+    <div class="text-center fs-6">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="ShowClientRegister">Sign up</a>
+    </div>
+</div>

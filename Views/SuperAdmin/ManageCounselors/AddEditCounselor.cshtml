@@ -2,6 +2,7 @@
 @model IEnumerable<icounselvault.Models.Auth.User>
 @{
     ViewData["Title"] = "Add/Edit Counselor";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
     dynamic? selectedUser = TempData["selectedUser"];
     dynamic? decryptedPassword = TempData["decryptedPassword"];
     dynamic? selectedCounselor = TempData["selectedCounselor"];

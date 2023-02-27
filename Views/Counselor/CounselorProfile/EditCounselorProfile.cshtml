@@ -4,6 +4,7 @@
 }
 @if (loggedInCounselor != null) 
 {
+    Layout = "~/Views/Shared/_CounselorLayout.cshtml";
     <h1>Edit Profile</h1>
     <form action="@Url.Action("EditCounselor", "CounselorProfile")" method="post">
         <div>
@@ -44,6 +45,7 @@
 }
 else 
 {
+    Layout = null;
     <h1>Create Profile</h1>
     @Html.ValidationSummary()
     <form action="@Url.Action("AddCounselor", "CounselorProfile")" method="post">
