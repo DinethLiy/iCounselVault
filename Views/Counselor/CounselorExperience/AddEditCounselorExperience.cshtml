@@ -1,46 +1,95 @@
 ﻿@{
-    ViewData["Title"] = "Add/Edit Past Experiences";
-    Layout = "~/Views/Shared/_CounselorLayout.cshtml";
-    dynamic? counselorExperience = TempData["counselorExperience"];
+	ViewData["Title"] = "Add/Edit Past Experiences";
+	Layout = "~/Views/Shared/_CounselorLayout.cshtml";
+	dynamic? counselorExperience = TempData["counselorExperience"];
 }
+<head>
+	<!-- Meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Styles -->
+	<link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+
+	<!-- Scripts -->
+	<script src="~/vendor/jquery/jquery.min.js"></script>
+	<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="~/js/StylePack/sb-admin-2.min.js"></script>
+	<script src="~/vendor/chart.js/Chart.min.js"></script>
+	<script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+	<script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+</head>
+<body>
 @if (counselorExperience != null)
 {
-    <h1>Edit Past Experiences</h1>
-    <form action="@Url.Action("EditCounselorExperience", "CounselorExperience")" method="post">
-        <div>
-            <label>School Experience</label>
-            <input type="text" name="School" id="School" placeholder="School Experience.." value="@counselorExperience.SCHOOL_EXPERIENCE">
-        </div>
-        <div>
-            <label>Higher Education</label>
-            <input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education.." value="@counselorExperience.HIGHER_EDU_EXPERIENCE">
-        </div>
-        <div>
-            <label>Job Experience</label>
-            <input type="text" name="Career" id="Career" placeholder="Job Experience.." value="@counselorExperience.JOB_EXPERIENCE">
-        </div>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Edit Past Experiences</h1>
+			@Html.ValidationSummary()
+		</div>
+
+		<!-- Form Card -->
+		<div class="col">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Experience Details</h6>
+				</div>
+				<div class="card-body">
+					<form action="@Url.Action("EditCounselorExperience", "CounselorExperience")" method="post" class="form-group">
+						<div class="mb-3">
+							<label class="form-label">School Experience</label>
+							<input type="text" name="School" id="School" placeholder="School Experience.." value="@counselorExperience.SCHOOL_EXPERIENCE" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Higher Education</label>
+							<input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education.." value="@counselorExperience.HIGHER_EDU_EXPERIENCE" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Job Experience</label>
+							<input type="text" name="Career" id="Career" placeholder="Job Experience.." value="@counselorExperience.JOB_EXPERIENCE" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
 }
 else
 {
-    <h1>Add Past Experiences</h1>
-    @Html.ValidationSummary()
-    <form action="@Url.Action("AddCounselorExperience", "CounselorExperience")" method="post">
-        <div>
-            <label>School Experience</label>
-            <input type="text" name="School" id="School" placeholder="School Experience..">
-        </div>
-        <div>
-            <label>Higher Education</label>
-            <input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education..">
-        </div>
-        <div>
-            <label>Job Experience</label>
-            <input type="text" name="Career" id="Career" placeholder="Job Experience..">
-        </div>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Add Past Experiences</h1>
+			@Html.ValidationSummary()
+		</div>
+
+		<!-- Form Card -->
+		<div class="col">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Experience Details</h6>
+				</div>
+				<div class="card-body">
+					<form action="@Url.Action("AddCounselorExperience", "CounselorExperience")" method="post" class="form-group">
+						<div class="mb-3">
+							<label class="form-label">School Experience</label>
+							<input type="text" name="School" id="School" placeholder="School Experience.." class="form-control">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Higher Education</label>
+							<input type="text" name="HigherEducation" id="HigherEducation" placeholder="Higher Education.." class="form-control">
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Job Experience</label>
+							<input type="text" name="Career" id="Career" placeholder="Job Experience.." class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
 }
+</body>

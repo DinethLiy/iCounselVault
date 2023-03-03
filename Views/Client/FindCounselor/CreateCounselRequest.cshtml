@@ -3,26 +3,71 @@
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
     dynamic? counselor = TempData["counselor"];
 }
-<h1>Create Counsel Request</h1>
-@Html.ValidationSummary()
-<form action="@Url.Action("AddCounselRequest", "ClientCounselRequests")" method="post">
-    <input type="hidden" name="counselorId" id="counselorId" value="@counselor.COUNSELOR_ID">
-    <div><label>Counselor: @counselor.NAME</label></div>
-    <div><label>Date of Birth: @counselor.DOB</label></div>
-    <div><label>Gender: @counselor.GENDER</label></div>
-    <div><label>Country: @counselor.COUNTRY</label></div>
-    <div><label>Contact Number: @counselor.CONTACT_NUM</label></div>
-    <div><label>Email: @counselor.EMAIL</label></div>
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div>
-        <label>Start Date of Possible Date Range for Counselling</label>
-        <input type="date" name="StartDate" id="StartDate">
+    <!-- Styles -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/js/StylePack/sb-admin-2.min.js"></script>
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+    <script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+</head>
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create Counsel Request</h1>
+        @Html.ValidationSummary()
     </div>
-    <div>
-        <label>End Date of Possible Date Range for Counselling</label>
-        <input type="date" name="EndDate" id="EndDate">
+
+    <!-- Counselor Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Counselor Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">Counselor: @counselor.NAME</label></div>
+                <div class="mb-3"><label class="form-label">Date of Birth: @counselor.DOB</label></div>
+                <div class="mb-3"><label class="form-label">Gender: @counselor.GENDER</label></div>
+                <div class="mb-3"><label class="form-label">Country: @counselor.COUNTRY</label></div>
+                <div class="mb-3"><label class="form-label">Contact Number: @counselor.CONTACT_NUM</label></div>
+                <div class="mb-3"><label class="form-label">Email: @counselor.EMAIL</label></div>
+            </div>
+        </div>
     </div>
-    <label>You may provide the same date as the Starting Date and Ending Date</label>
-    
-    <button type="submit">Create</button>
-</form>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Counsel Request Details</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("AddCounselRequest", "ClientCounselRequests")" method="post" class="form-group">
+                    <input type="hidden" name="counselorId" id="counselorId" value="@counselor.COUNSELOR_ID">
+                    <div class="mb-3">
+                        <label class="form-label">Start Date of Possible Date Range for Counselling</label>
+                        <input type="date" name="StartDate" id="StartDate" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">End Date of Possible Date Range for Counselling</label>
+                        <input type="date" name="EndDate" id="EndDate" class="form-control">
+                    </div>
+                    <label class="form-label">You may provide the same date as the Starting Date and Ending Date</label><br>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

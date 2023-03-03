@@ -2,86 +2,137 @@
     ViewData["Title"] = "Edit Profile";
     dynamic? loggedInCounselor = TempData["loggedInCounselor"];
 }
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Styles -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/js/StylePack/sb-admin-2.min.js"></script>
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+    <script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+</head>
+<body>
 @if (loggedInCounselor != null) 
 {
     Layout = "~/Views/Shared/_CounselorLayout.cshtml";
-    <h1>Edit Profile</h1>
-    <form action="@Url.Action("EditCounselor", "CounselorProfile")" method="post">
-        <div>
-            <label>Full Name</label>
-            <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInCounselor.NAME">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
+            @Html.ValidationSummary()
         </div>
-        <div>
-            <label>Date of Birth: @loggedInCounselor.DOB</label><br>
-            <label>This cannot be edited</label>
+
+        <!-- Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("EditCounselor", "CounselorProfile")" method="post" class="form-group">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInCounselor.NAME" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date of Birth: @loggedInCounselor.DOB</label><br>
+                            <label class="form-label">This cannot be edited</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." value="@loggedInCounselor.GENDER" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">NIC: @loggedInCounselor.NIC</label><br>
+                            <label class="form-label">This cannot be edited</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Main Address</label>
+                            <input type="text" name="Address" id="Address" placeholder="Your Address.." value="@loggedInCounselor.ADDRESS" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <input type="text" name="Country" id="Country" placeholder="Your Country.." value="@loggedInCounselor.COUNTRY" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contact Number</label>
+                            <input type="text" name="Contact" id="Contact" placeholder="Your Contact Number.." value="@loggedInCounselor.CONTACT_NUM" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="Email" name="Email" id="email" placeholder="Your Email.." value="@loggedInCounselor.EMAIL" class="form-control">
+                        </div>
+                        <label class="form-label">Your contact details will only be shared with Clients within iCounselVault</label><br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <label>Gender</label>
-            <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." value="@loggedInCounselor.GENDER">
-        </div>
-        <div>
-            <label>NIC: @loggedInCounselor.NIC</label><br>
-            <label>This cannot be edited</label>
-        </div>
-        <div>
-            <label>Main Address</label>
-            <input type="text" name="Address" id="Address" placeholder="Your Address.." value="@loggedInCounselor.ADDRESS">
-        </div>
-        <div>
-            <label>Country</label>
-            <input type="text" name="Country" id="Country" placeholder="Your Country.." value="@loggedInCounselor.COUNTRY">
-        </div>
-        <div>
-            <label>Contact Number</label>
-            <input type="text" name="Contact" id="Contact" placeholder="Your Contact Number.." value="@loggedInCounselor.CONTACT_NUM">
-        </div>
-        <div>
-            <label>Email Address</label>
-            <input type="Email" name="Email" id="email" placeholder="Your Email.." value="@loggedInCounselor.EMAIL">
-        </div>
-        <label>Your contact details will only be shared with Counsellors that you request guidance from.</label><br>
-        <button type="submit">Submit</button>
-    </form>
 }
 else 
 {
     Layout = null;
-    <h1>Create Profile</h1>
-    @Html.ValidationSummary()
-    <form action="@Url.Action("AddCounselor", "CounselorProfile")" method="post">
-        <div>
-            <label>Full Name</label>
-            <input type="text" name="Name" id="Name" placeholder="Your Name..">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Create Profile</h1>
+            @Html.ValidationSummary()
         </div>
-        <div>
-            <label>Date of Birth</label>
-            <input type="date" name="DateOfBirth" id="DateOfBirth">
+
+        <!-- Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("AddCounselor", "CounselorProfile")" method="post" class="form-group">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="Name" id="Name" placeholder="Your Name.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date of Birth</label><br>
+                            <input type="date" name="DateOfBirth" id="DateOfBirth" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">NIC</label><br>
+                            <input type="text" name="NIC" id="NIC" placeholder="Your NIC.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Main Address</label>
+                            <input type="text" name="Address" id="Address" placeholder="Your Address.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <input type="text" name="Country" id="Country" placeholder="Your Country.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contact Number</label>
+                            <input type="text" name="Contact" id="Contact" placeholder="Your Contact Number.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="Email" name="Email" id="email" placeholder="Your Email.." class="form-control">
+                        </div>
+                        <label class="form-label">Your contact details will only be shared with Clients within iCounselVault</label><br>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <label>Gender</label>
-            <input type="text" name="Gender" id="Gender" placeholder="Your Gender..">
-        </div>
-        <div>
-            <label>NIC</label>
-            <input type="text" name="NIC" id="NIC" placeholder="Your NIC..">
-        </div>
-        <div>
-            <label>Main Address</label>
-            <input type="text" name="Address" id="Address" placeholder="Your Address..">
-        </div>
-        <div>
-            <label>Country</label>
-            <input type="text" name="Country" id="Country" placeholder="Your Country..">
-        </div>
-        <div>
-            <label>Contact Number</label>
-            <input type="text" name="Contact" id="Contact" placeholder="Your Contact Number..">
-        </div>
-        <div>
-            <label>Email Address</label>
-            <input type="Email" name="Email" id="email" placeholder="Your Email..">
-        </div>
-        <label>Your contact details will only be shared with Counsellors that you request guidance from.</label><br>
-        <button type="submit">Submit</button>
-    </form>
 }
+</body>

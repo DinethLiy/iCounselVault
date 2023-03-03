@@ -4,28 +4,73 @@
     Layout = "~/Views/Shared/_CounselorLayout.cshtml";
     dynamic? counselRequest = TempData["counselRequest"];
 }
-<h1>Manage Counsel Request</h1>
-@Html.ValidationSummary()
-<form action="@Url.Action("EditCounselRequest", "CounselorCounselRequests")" method="post">
-    <input type="hidden" name="counselRequestId" id="counselRequestId" value="@counselRequest.COUNSEL_REQUEST_ID">
-    <div><label>Client: @counselRequest.client.NAME</label></div>
-    <div><label>Country: @counselRequest.client.COUNTRY</label></div>
-    <div><label>Contact Number: @counselRequest.client.CONTACT_NUM</label></div>
-    <div><label>Email: @counselRequest.client.EMAIL</label></div>
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div>
-        <label>Status</label>
-        <select name="Status" id="Status">
-            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses))) 
-            {
-                <option value="@status">@status</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label>Remark (Optional)</label>
-        <input type="text" name="Remark" id="Remark" placeholder="Say Something About This Request...">
+    <!-- Styles -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/js/StylePack/sb-admin-2.min.js"></script>
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+    <script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+</head>
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manage Counsel Request</h1>
+        @Html.ValidationSummary()
     </div>
 
-    <button type="submit">Submit</button>
-</form>
+    <!-- Client Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Client Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">Client: @counselRequest.client.NAME</label></div>
+                <div class="mb-3"><label class="form-label">Country: @counselRequest.client.COUNTRY</label></div>
+                <div class="mb-3"><label class="form-label">Contact Number: @counselRequest.client.CONTACT_NUM</label></div>
+                <div class="mb-3"><label class="form-label">Email: @counselRequest.client.EMAIL</label></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Counsel Request Details</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("EditCounselRequest", "CounselorCounselRequests")" method="post" class="form-group">
+                    <input type="hidden" name="counselRequestId" id="counselRequestId" value="@counselRequest.COUNSEL_REQUEST_ID">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="Status" id="Status" class="custom-select">
+                            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses)))
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Remark (Optional)</label>
+                        <input type="text" name="Remark" id="Remark" placeholder="Say Something About This Request..." class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
