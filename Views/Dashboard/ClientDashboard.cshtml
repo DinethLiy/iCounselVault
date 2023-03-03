@@ -2,6 +2,47 @@
     ViewData["Title"] = "Client";
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
 }
-<h1>Client</h1>
-<a asp-controller="ClientDashboard" asp-action="ShowClientProfile">Profile</a>
-<a asp-controller="ClientDashboard" asp-action="ShowSearchCounselors">Find a Career Guidance Counselor</a>
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Styles -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/js/StylePack/sb-admin-2.min.js"></script>
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+    <script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+</head>
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Client</h1>
+    </div>
+
+    <!-- Navigation Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Navigation</h6>
+            </div>
+            <div class="card-body">
+                <!-- Navigation Buttons -->
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="ClientDashboard" asp-action="ShowClientProfile">
+                    <i class="fas fa-house-user fa-fw me-3"></i>Your Profile
+                </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="ClientDashboard" asp-action="ShowSearchCounselors">
+                    <i class="fas fa-user-tie fa-fw me-3"></i>Find a Career Guidance Counselor
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
