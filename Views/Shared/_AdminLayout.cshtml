@@ -1,72 +1,292 @@
-﻿<head>
+﻿<!DOCTYPE html>
+<head>
+    <!-- Meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link href="~/css/NavBar/_SuperAdminLayout.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet">
-    <link href="~/css/NavBar/_SuperAdminLayout.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+
+    <!-- Styles -->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/css/StylePack/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <title>@ViewData["Title"] - iCounselVault</title>
 </head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" asp-controller="AdminDashboard" asp-action="Index">
-            <img src="~/img/logo-high-res-transparent.png" width="60" height="60" class="d-inline-block align-top" alt="">
-            <font size="6"><strong>iCounselVault</strong></font>
-        </a>
-        @*<form class="form-inline  ">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        </form>*@
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="mr-auto"></div>
-            <ul class="navbar-nav my-2 my-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="AdminDashboard" asp-action="Index"><i class="fas fa-home fa-fw me-3"></i><span>Home</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowCounselors"><i class="fas fa-user-tie fa-fw me-3"></i><span>Counselors</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowClients"><i class="fas fa-users fa-fw me-3"></i><span>Clients</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowInsertRequests"><i class="fas fa-exchange-alt fa-fw me-3"></i><span>Guidance Insert Requests</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowCounselRequests"><i class="fas fa-business-time fa-fw me-3"></i><span>Counsel Requests</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="Auth" asp-action="Index"><i class="fas fa-lock fa-fw me-3"></i><span>Logout</span></a>
-                </li>
-                @*<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profile
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
-                <h6 class="dropdown-header">Dropdown header</h6>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="AdminDashboard" asp-action="Index">
+                <div class="sidebar-brand-icon">
+                    <img src="~/img/logo-high-res-transparent-white.png" width="60" height="60" class="d-inline-block align-top" alt="">
                 </div>
+                <div class="sidebar-brand-text mx-3">iCounselVault</div>
+            </a>
 
-                </li>*@
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-            </ul>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdminDashboard" asp-action="Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                System Config
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowCounselors">
+                    <i class="fas fa-user-tie fa-fw me-3"></i>
+                    <span>Counselors</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowClients">
+                    <i class="fas fa-users fa-fw me-3"></i>
+                    <span>Clients</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowInsertRequests">
+                    <i class="fas fa-exchange-alt fa-fw me-3"></i>
+                    <span>Guidance Insert Requests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="AdminDashboard" asp-action="ShowCounselRequests">
+                    <i class="fas fa-business-time fa-fw me-3"></i>
+                    <span>Counsel Requests</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Alerts -->
+                        @*<li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <!-- Counter - Alerts -->
+                        <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="alertsDropdown">
+                        <h6 class="dropdown-header">
+                        Alerts Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                        <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                        </div>
+                        <div>
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                        <i class="fas fa-donate text-white"></i>
+                        </div>
+                        </div>
+                        <div>
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                        </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                        </div>
+                        <div>
+                        <div class="small text-gray-500">December 2, 2019</div>
+                        Spending Alert: We've noticed unusually high spending for your account.
+                        </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                        </li>*@
+
+                        <!-- Nav Item - Messages -->
+                        @*<li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-envelope fa-fw"></i>
+                        <!-- Counter - Messages -->
+                        <span class="badge badge-danger badge-counter">7</span>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">
+                        Message Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                        alt="...">
+                        <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div class="font-weight-bold">
+                        <div class="text-truncate">
+                        Hi there! I am wondering if you can help me with a
+                        problem I've been having.
+                        </div>
+                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                        </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                        alt="...">
+                        <div class="status-indicator"></div>
+                        </div>
+                        <div>
+                        <div class="text-truncate">
+                        I have the photos that you ordered last month, how
+                        would you like them sent to you?
+                        </div>
+                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                        </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                        alt="...">
+                        <div class="status-indicator bg-warning"></div>
+                        </div>
+                        <div>
+                        <div class="text-truncate">
+                        Last month's report looks great, I am very happy with
+                        the progress so far, keep up the good work!
+                        </div>
+                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                        </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="...">
+                        <div class="status-indicator bg-success"></div>
+                        </div>
+                        <div>
+                        <div class="text-truncate">
+                        Am I a good boy? The reason I ask is because someone
+                        told me that people say this to all dogs, even if they aren't good...
+                        </div>
+                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                        </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                        </li>*@
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                <img class="img-profile rounded-circle"
+                                     src="~/img/StylePack/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="Index">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; iCounselVault 2023</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-    </nav>
-    @RenderBody()
+        <!-- End of Content Wrapper -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/js/StylePack/sb-admin-2.min.js"></script>
+
+    <!-- Other Scripts -->
+    <script src="~/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/js/StylePack/demo/chart-area-demo.js"></script>
+    <script src="~/js/StylePack/demo/chart-pie-demo.js"></script>
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/StylePack/demo/datatables-demo.js"></script>
 </body>
