@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "New Guidance Record";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+    dynamic? sourceList = TempData["sourceList"];
+    dynamic? satisfactionList = TempData["satisfactionList"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create a Guidance Record</h1>
+        <h6 class="m-0 font-weight-bold text-gray-800">New Guidance Records will be sent to Administrator approval before they can be added.</h6>
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Guidance Record Details</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("ClientAddGuidanceRecord", "GuidanceClient")" method="post" class="form-group">
+                    <div class="mb-3">
+                        <label class="form-label">Source of Career Guidance</label>
+                        <select name="source" id="source" class="custom-select">
+                            @foreach (var source in sourceList)
+                            {
+                                <option value="@source">@source</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Guidance Advice</label>
+                        <input type="text" name="advice" id="advice" placeholder="Guidance Advice in brief" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Satisfaction with the Given Advice</label>
+                        <select name="satifaction" id="satifaction" class="custom-select">
+                            @foreach (var satifaction in satisfactionList)
+                            {
+                                <option value="@satifaction">@satifaction</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Recieved Date</label>
+                        <input type="date" name="createdDate" id="createdDate" placeholder="Recieved Date" class="date">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,53 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Edit Insert Request";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+    dynamic? selectedInsertRequest = TempData["selectedInsertRequest"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Insert Request</h1>
+        @Html.ValidationSummary()
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Insert Request Details</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("EditInsertRequest", "ClientManageInsertRequests")" method="post" class="form-group">
+                    <div>
+                        <input type="hidden" name="insertRequestId" id="insertRequestId" value="@selectedInsertRequest.COUNSEL_DATA_INSERT_REQUEST_ID" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Guidance Advice: @selectedInsertRequest.clientGuidanceHistory.GUIDANCE_ADVICE</label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="status" class="custom-select">
+                            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses)))
+                            {
+                                if (status.ToString() == selectedInsertRequest.INSERT_REQUEST_STATUS)
+                                {
+                                    <option value="@status" selected="selected">@status</option>
+                                }
+                                else
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Remark (Optional)</label>
+                        <input type="text" name="remark" id="remark" value="@selectedInsertRequest.INSERT_REQUEST_REMARK" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

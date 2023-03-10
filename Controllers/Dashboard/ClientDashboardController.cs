@@ -28,7 +28,15 @@ namespace icounselvault.Controllers.Dashboard
         {
             return RedirectToAction("ShowSearchCounselors", "ClientCounselRequests");
         }
-
         
+        public RedirectToActionResult ShowClientGuidanceHistory()
+        {
+            return RedirectToAction("ViewClientGuidanceHistory", "GuidanceClient");
+        }
+
+        public RedirectToActionResult ShowInsertRequests()
+        {
+            return RedirectToAction("ViewInsertRequests", "ClientManageInsertRequests");
+        }
     }
 }

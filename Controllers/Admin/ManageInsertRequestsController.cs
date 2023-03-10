@@ -1,4 +1,5 @@
-﻿using icounselvault.Utility;
+﻿using icounselvault.Models.Counseling;
+using icounselvault.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,7 @@ namespace icounselvault.Controllers.Admin
                 .Where(ir => ir.COUNSEL_DATA_INSERT_REQUEST_ID == int.Parse(insertRequestId))
                 .Include(ir => ir.clientGuidanceHistory)
                 .FirstOrDefault();
+            var foundRecord = foundinsertRequest.clientGuidanceHistory;
             if (foundinsertRequest.clientGuidanceHistory.GUIDANCE_ADVICE != guidanceAdvice && remark == null)
             {
                 ModelState.AddModelError("", "Please enter a remark if you edit the Guidance Advice!");
@@ -53,6 +55,10 @@ namespace icounselvault.Controllers.Admin
                 if (remark != null)
                 {
                     foundinsertRequest.INSERT_REQUEST_REMARK = remark;
+                }
+                if (status == "ACCEPTED")
+                {
+                    foundRecord.HISTORY_STATUS = "ACT";
                 }
                 _context.SaveChanges();
                 var insertRequests = _context.COUNSEL_DATA_INSERT_REQUEST

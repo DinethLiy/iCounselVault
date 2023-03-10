@@ -1,0 +1,51 @@
+﻿@model IEnumerable<icounselvault.Models.Profiles.Counselor>
+@{
+    ViewData["Title"] = "Guidance Record Info";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+
+    dynamic? guidanceRecord = TempData["guidanceRecord"];
+    bool isExternal = true;
+    if (guidanceRecord.counselor != null)
+    {
+        isExternal = false;        
+    }
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Guidance Record Information</h1>
+    </div>
+    <!-- Guidance Record Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Guidance Record Details</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3"><label class="form-label">Date: @guidanceRecord.CREATED_DATE</label></div>
+                <div class="mb-3"><label class="form-label">Source: @guidanceRecord.EXTERNAL_GUIDANCE_SOURCE</label></div>
+                <div class="mb-3"><label class="form-label">Guidance Advice: @guidanceRecord.GUIDANCE_ADVICE</label></div>
+                <div class="mb-3"><label class="form-label">Satisfaction with the Advice: @guidanceRecord.CLIENT_SATISFACTION</label></div>
+            </div>
+        </div>
+    </div>
+    @if (!isExternal)
+    {
+        <!-- Counselor Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">iCounselVault Counselor Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3"><label class="form-label">Counselor: @guidanceRecord.counselor.NAME</label></div>
+                    <div class="mb-3"><label class="form-label">Date of Birth: @guidanceRecord.counselor.DOB</label></div>
+                    <div class="mb-3"><label class="form-label">Gender: @guidanceRecord.counselor.GENDER</label></div>
+                    <div class="mb-3"><label class="form-label">Country: @guidanceRecord.counselor.COUNTRY</label></div>
+                    <div class="mb-3"><label class="form-label">Contact Number: @guidanceRecord.counselor.CONTACT_NUM</label></div>
+                    <div class="mb-3"><label class="form-label">Email: @guidanceRecord.counselor.EMAIL</label></div>
+                </div>
+            </div>
+        </div>
+    }
+</body>

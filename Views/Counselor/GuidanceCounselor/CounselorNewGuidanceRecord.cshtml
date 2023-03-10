@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "New Guidance Record";
+    Layout = "~/Views/Shared/_CounselorLayout.cshtml";
+    dynamic? foundClient = TempData["foundClient"];
+    dynamic? satisfactionList = TempData["satisfactionList"];
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Create a Guidance Record</h1>
+        <h6 class="m-0 font-weight-bold text-gray-800">New Guidance Records will be sent to Client approval before they can be added.</h6>
+    </div>
+
+    <!-- Search Client Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Find a Client</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("FindClient", "GuidanceCounselor")" method="post" class="form-group">
+                    @Html.ValidationSummary()
+                    <div class="mb-3">
+                        <label class="form-label">Client Code</label>
+                        @if (foundClient != null)
+                        {
+                            <input type="text" name="code" id="code" placeholder="Client's Unique Code" value="@foundClient.CLIENT_CODE" class="form-control">
+                        }
+                        else
+                        {
+                            <input type="text" name="code" id="code" placeholder="Client's Unique Code" class="form-control">
+                        }
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @if (foundClient != null)
+    {
+        <!-- Guidance Record Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Guidance Record Details</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("CounselorAddGuidanceRecord", "GuidanceCounselor")" method="post" class="form-group">
+                        <input type="hidden" name="clientID" id="clientID" value="@foundClient.CLIENT_ID">
+                        <div class="mb-3">
+                            <label class="form-label">Guidance Advice</label>
+                            <input type="text" name="advice" id="advice" placeholder="Guidance Advice in brief" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Client's Satisfaction with the Given Advice</label>
+                            <select name="satifaction" id="satifaction" class="custom-select">
+                                @foreach (var satifaction in satisfactionList)
+                                {
+                                    <option value="@satifaction">@satifaction</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date of Counseling</label>
+                            <input type="date" name="createdDate" id="createdDate" placeholder="Counseling Date" class="date">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Client Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3"><label class="form-label">Client: @foundClient.NAME</label></div>
+                    <div class="mb-3"><label class="form-label">Country: @foundClient.COUNTRY</label></div>
+                    <div class="mb-3"><label class="form-label">Contact Number: @foundClient.CONTACT_NUM</label></div>
+                    <div class="mb-3"><label class="form-label">Email: @foundClient.EMAIL</label></div>
+                </div>
+            </div>
+        </div>
+    }
+</body>

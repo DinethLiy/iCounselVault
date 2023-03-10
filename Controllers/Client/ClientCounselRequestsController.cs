@@ -86,7 +86,7 @@ namespace icounselvault.Controllers.Client
                 .Include(cr => cr.client)
                 .Include(cr => cr.counselor)
                 .Where(cr => cr.client.CLIENT_ID == foundClient.CLIENT_ID
-                          && (cr.COUNSEL_REQUEST_STATUS != "REJECTED" || cr.TO_DATE < DateTime.Now))
+                          && (cr.COUNSEL_REQUEST_STATUS != "REJECTED" || cr.TO_DATE > DateTime.Now))
                 .FirstOrDefault();
             TempData["counselRequest"] = counselRequest;
         }
