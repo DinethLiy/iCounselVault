@@ -1,0 +1,372 @@
+﻿@{
+    ViewData["Title"] = "Personality Questionnaire";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+
+    dynamic? pageNumber = TempData["pageNumber"];
+    dynamic? answersForPage2 = ViewData["answersForPage2"];
+    dynamic? answersForPage3 = ViewData["answersForPage3"];
+    dynamic? answersForPage4 = ViewData["answersForPage4"];
+}
+<body>
+    @if (pageNumber == "1")
+    {
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h2 mb-0 text-gray-800">Take a Short Survey to determine your personality traits</h1><br>
+            @Html.ValidationSummary()
+        </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h5 class="h5 mb-0 text-gray-800">Please take your time and answer the questions truthfully.<br> Results of this survey will only be visible to you and iCounselVault counselors who you share your Profile Code with.<br>This survey can be re-taken as many times as you wish.</h5>
+        </div>
+
+        <!-- Form Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Personality Survey</h6>
+                </div>
+                <div class="card-body">
+                    <form action="@Url.Action("GetSurveyPage1Data", "ClientSurvey")" method="post" class="form-group">
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">1. I consider myself to be quite uncritical and tolerant of others</p></label><br>
+                            <input type="radio" name="leader2" id="leader2" value="leader2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="leader2" id="leader2" value="leader2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="leader2" id="leader2" value="leader2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="leader2" id="leader2" value="leader2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="leader2" id="leader2" value="leader2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">2. I like being there for people when they are sad</p></label><br>
+                            <input type="radio" name="agreeable1" id="agreeable1" value="agreeable1A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="agreeable1" id="agreeable1" value="agreeable1A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="agreeable1" id="agreeable1" value="agreeable1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="agreeable1" id="agreeable1" value="agreeable1C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="agreeable1" id="agreeable1" value="agreeable1C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">3. I choose my friends carefully</p></label><br>
+                            <input type="radio" name="loyal3" id="loyal3" value="loyal3A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="loyal3" id="loyal3" value="loyal3A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="loyal3" id="loyal3" value="loyal3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="loyal3" id="loyal3" value="loyal3C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="loyal3" id="loyal3" value="loyal3C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">4. I don't care much about others' problems that don't directly concern me</p></label><br>
+                            <input type="radio" name="loyal1" id="loyal1" value="loyal1C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="loyal1" id="loyal1" value="loyal1C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="loyal1" id="loyal1" value="loyal1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="loyal1" id="loyal1" value="loyal1A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="loyal1" id="loyal1" value="loyal1A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">5. I would rather be in a workplace that's full or surprises instead of one that works according to a fixed plan</p></label><br>
+                            <input type="radio" name="consc2" id="consc2" value="consc2C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="consc2" id="consc2" value="consc2C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="consc2" id="consc2" value="consc2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="consc2" id="consc2" value="consc2A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="consc2" id="consc2" value="consc2A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">6. I always put in extra effort to avoid making mistakes</p></label><br>
+                            <input type="radio" name="consc3" id="consc3" value="consc3A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="consc3" id="consc3" value="consc3A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="consc3" id="consc3" value="consc3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="consc3" id="consc3" value="consc3C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="consc3" id="consc3" value="consc3C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <label class="form-label"><p class="lead text-gray-900">7. I can get borderline rude when I am organizing others' work</p></label><br>
+                            <input type="radio" name="agreeable3" id="agreeable3" value="agreeable3C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                            <input type="radio" name="agreeable3" id="agreeable3" value="agreeable3C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                            <input type="radio" name="agreeable3" id="agreeable3" value="agreeable3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                            <input type="radio" name="agreeable3" id="agreeable3" value="agreeable3A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                            <input type="radio" name="agreeable3" id="agreeable3" value="agreeable3A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Next Page</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        @if (pageNumber == "2")
+        {
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Personality Traits Survey - Page 2 of 4</h1>
+                @Html.ValidationSummary()
+            </div>
+
+            <!-- Form Card -->
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Personality Survey</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="@Url.Action("GetSurveyPage2Data", "ClientSurvey")" method="post" class="form-group">
+                            <!-- Previous Answers -->
+                            <input type="hidden" name="leader2" id="leader2" value="@answersForPage2[0]">
+                            <input type="hidden" name="agreeable1" id="agreeable1" value="@answersForPage2[1]">
+                            <input type="hidden" name="loyal3" id="loyal3" value="@answersForPage2[2]">
+                            <input type="hidden" name="loyal1" id="loyal1" value="@answersForPage2[3]">
+                            <input type="hidden" name="consc2" id="consc2" value="@answersForPage2[4]">
+                            <input type="hidden" name="consc3" id="consc3" value="@answersForPage2[5]">
+                            <input type="hidden" name="agreeable3" id="agreeable3" value="@answersForPage2[6]">
+                            <!-- /Previous Answers -->
+
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">8. There is no art form or event that I wouldn't like to experience</p></label><br>
+                                <input type="radio" name="curious1" id="curious1" value="curious1A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="curious1" id="curious1" value="curious1A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="curious1" id="curious1" value="curious1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="curious1" id="curious1" value="curious1C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="curious1" id="curious1" value="curious1C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">9. No matter the amount of pressure, I don't lose my composure</p></label><br>
+                                <input type="radio" name="leader3" id="leader3" value="leader3A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="leader3" id="leader3" value="leader3A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="leader3" id="leader3" value="leader3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="leader3" id="leader3" value="leader3C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="leader3" id="leader3" value="leader3C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">10. I don't have a plan A or B, I do things whenever they pop up</p></label><br>
+                                <input type="radio" name="consc1" id="consc1" value="consc1C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="consc1" id="consc1" value="consc1C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="consc1" id="consc1" value="consc1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="consc1" id="consc1" value="consc1A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="consc1" id="consc1" value="consc1A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">11. I am known to be tough but fair</p></label><br>
+                                <input type="radio" name="leader1" id="leader1" value="leader1A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="leader1" id="leader1" value="leader1A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="leader1" id="leader1" value="leader1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="leader1" id="leader1" value="leader1C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="leader1" id="leader1" value="leader1C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">12. I prefer complex ideas over simple ones</p></label><br>
+                                <input type="radio" name="creative2" id="creative2" value="creative2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="creative2" id="creative2" value="creative2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="creative2" id="creative2" value="creative2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="creative2" id="creative2" value="creative2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="creative2" id="creative2" value="creative2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">13. I am good at tolerating unfinished work</p></label><br>
+                                <input type="radio" name="kind3" id="kind3" value="kind3A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="kind3" id="kind3" value="kind3A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="kind3" id="kind3" value="kind3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="kind3" id="kind3" value="kind3C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="kind3" id="kind3" value="kind3C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">14. Talking in front of a group of people makes me nervous</p></label><br>
+                                <input type="radio" name="introv2" id="introv2" value="introv2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="introv2" id="introv2" value="introv2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="introv2" id="introv2" value="introv2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="introv2" id="introv2" value="introv2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="introv2" id="introv2" value="introv2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Next Page</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (pageNumber == "3")
+        {
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Personality Traits Survey - Page 3 of 4</h1>
+                @Html.ValidationSummary()
+            </div>
+
+            <!-- Form Card -->
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Personality Survey</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="@Url.Action("GetSurveyPage3Data", "ClientSurvey")" method="post" class="form-group">
+                            <!-- Previous Answers -->
+                            <input type="hidden" name="leader2" id="leader2" value="@answersForPage3[0]">
+                            <input type="hidden" name="agreeable1" id="agreeable1" value="@answersForPage3[1]">
+                            <input type="hidden" name="loyal3" id="loyal3" value="@answersForPage3[2]">
+                            <input type="hidden" name="loyal1" id="loyal1" value="@answersForPage3[3]">
+                            <input type="hidden" name="consc2" id="consc2" value="@answersForPage3[4]">
+                            <input type="hidden" name="consc3" id="consc3" value="@answersForPage3[5]">
+                            <input type="hidden" name="agreeable3" id="agreeable3" value="@answersForPage3[6]">
+                            <input type="hidden" name="curious1" id="curious1" value="@answersForPage3[7]">
+                            <input type="hidden" name="leader3" id="leader3" value="@answersForPage3[8]">
+                            <input type="hidden" name="consc1" id="consc1" value="@answersForPage3[9]">
+                            <input type="hidden" name="leader1" id="leader1" value="@answersForPage3[10]">
+                            <input type="hidden" name="creative2" id="creative2" value="@answersForPage3[11]">
+                            <input type="hidden" name="kind3" id="kind3" value="@answersForPage3[12]">
+                            <input type="hidden" name="introv2" id="introv2" value="@answersForPage3[13]">
+                            <!-- /Previous Answers -->
+
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">15. I tend to get very anxious while waiting for an important event to happen</p></label><br>
+                                <input type="radio" name="emotion1" id="emotion1" value="emotion1C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="emotion1" id="emotion1" value="emotion1C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="emotion1" id="emotion1" value="emotion1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="emotion1" id="emotion1" value="emotion1A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="emotion1" id="emotion1" value="emotion1A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">16. Knowing bits and pieces of information about any topic is what I enjoy</p></label><br>
+                                <input type="radio" name="curious2" id="curious2" value="curious2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="curious2" id="curious2" value="curious2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="curious2" id="curious2" value="curious2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="curious2" id="curious2" value="curious2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="curious2" id="curious2" value="curious2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">17. I don't comment and emphasize every little flaw that I notice in others</p></label><br>
+                                <input type="radio" name="kind1" id="kind1" value="kind1A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="kind1" id="kind1" value="kind1A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="kind1" id="kind1" value="kind1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="kind1" id="kind1" value="kind1C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="kind1" id="kind1" value="kind1C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">18. I prefer the kindest option over the most rational option</p></label><br>
+                                <input type="radio" name="loyal2" id="loyal2" value="loyal2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="loyal2" id="loyal2" value="loyal2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="loyal2" id="loyal2" value="loyal2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="loyal2" id="loyal2" value="loyal2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="loyal2" id="loyal2" value="loyal2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">19. I tend to help others with their personal problems</p></label><br>
+                                <input type="radio" name="kind2" id="kind2" value="kind2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="kind2" id="kind2" value="kind2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="kind2" id="kind2" value="kind2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="kind2" id="kind2" value="kind2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="kind2" id="kind2" value="kind2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">20. Even seemingly casual situations can get me self-conscious</p></label><br>
+                                <input type="radio" name="emotion2" id="emotion2" value="emotion2C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="emotion2" id="emotion2" value="emotion2C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="emotion2" id="emotion2" value="emotion2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="emotion2" id="emotion2" value="emotion2A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="emotion2" id="emotion2" value="emotion2A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">21. I value my privacy over my social status</p></label><br>
+                                <input type="radio" name="introv1" id="introv1" value="introv1A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="introv1" id="introv1" value="introv1A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="introv1" id="introv1" value="introv1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="introv1" id="introv1" value="introv1C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="introv1" id="introv1" value="introv1C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Next Page</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (pageNumber == "4")
+        {
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Personality Traits Survey - Page 4 of 4</h1>
+                @Html.ValidationSummary()
+            </div>
+
+            <!-- Form Card -->
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Personality Survey</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="@Url.Action("GetSurveyPage4Data", "ClientSurvey")" method="post" class="form-group">
+                            <!-- Previous Answers -->
+                            <input type="hidden" name="leader2" id="leader2" value="@answersForPage4[0]">
+                            <input type="hidden" name="agreeable1" id="agreeable1" value="@answersForPage4[1]">
+                            <input type="hidden" name="loyal3" id="loyal3" value="@answersForPage4[2]">
+                            <input type="hidden" name="loyal1" id="loyal1" value="@answersForPage4[3]">
+                            <input type="hidden" name="consc2" id="consc2" value="@answersForPage4[4]">
+                            <input type="hidden" name="consc3" id="consc3" value="@answersForPage4[5]">
+                            <input type="hidden" name="agreeable3" id="agreeable3" value="@answersForPage4[6]">
+                            <input type="hidden" name="curious1" id="curious1" value="@answersForPage4[7]">
+                            <input type="hidden" name="leader3" id="leader3" value="@answersForPage4[8]">
+                            <input type="hidden" name="consc1" id="consc1" value="@answersForPage4[9]">
+                            <input type="hidden" name="leader1" id="leader1" value="@answersForPage4[10]">
+                            <input type="hidden" name="creative2" id="creative2" value="@answersForPage4[11]">
+                            <input type="hidden" name="kind3" id="kind3" value="@answersForPage4[12]">
+                            <input type="hidden" name="introv2" id="introv2" value="@answersForPage4[13]">
+                            <input type="hidden" name="emotion1" id="emotion1" value="@answersForPage4[14]">
+                            <input type="hidden" name="curious2" id="curious2" value="@answersForPage4[15]">
+                            <input type="hidden" name="kind1" id="kind1" value="@answersForPage4[16]">
+                            <input type="hidden" name="loyal2" id="loyal2" value="@answersForPage4[17]">
+                            <input type="hidden" name="kind2" id="kind2" value="@answersForPage4[18]">
+                            <input type="hidden" name="emotion2" id="emotion2" value="@answersForPage4[19]">
+                            <input type="hidden" name="introv1" id="introv1" value="@answersForPage4[20]">
+                            <!-- /Previous Answers -->
+
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">22. I am always curious about uncommon things</p></label><br>
+                                <input type="radio" name="curious3" id="curious3" value="curious3A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="curious3" id="curious3" value="curious3A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="curious3" id="curious3" value="curious3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="curious3" id="curious3" value="curious3C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="curious3" id="curious3" value="curious3C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">23. There are many things that I stay away from because I'm afraid I won't be good at them</p></label><br>
+                                <input type="radio" name="creative1" id="creative1" value="creative1C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="creative1" id="creative1" value="creative1C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="creative1" id="creative1" value="creative1B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="creative1" id="creative1" value="creative1A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="creative1" id="creative1" value="creative1A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">24. I constantly seek other's attention</p></label><br>
+                                <input type="radio" name="introv3" id="introv3" value="introv3C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="introv3" id="introv3" value="introv3C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="introv3" id="introv3" value="introv3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="introv3" id="introv3" value="introv3A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="introv3" id="introv3" value="introv3A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">25. I would rather follow trusted methods instead of innovating new methods</p></label><br>
+                                <input type="radio" name="creative3" id="creative3" value="creative3C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="creative3" id="creative3" value="creative3C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="creative3" id="creative3" value="creative3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="creative3" id="creative3" value="creative3A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="creative3" id="creative3" value="creative3A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">26. I am a cheerful person</p></label><br>
+                                <input type="radio" name="agreeable2" id="agreeable2" value="agreeable2A" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="agreeable2" id="agreeable2" value="agreeable2A" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="agreeable2" id="agreeable2" value="agreeable2B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="agreeable2" id="agreeable2" value="agreeable2C" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="agreeable2" id="agreeable2" value="agreeable2C" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <label class="form-label"><p class="lead text-gray-900">27. My emotional reactions often surprise others</p></label><br>
+                                <input type="radio" name="emotion3" id="emotion3" value="emotion3C" class="form-check-input" required><label class="form-check-label">Agree</label><br>
+                                <input type="radio" name="emotion3" id="emotion3" value="emotion3C" class="form-check-input" required><label class="form-check-label">Slightly Agree</label><br>
+                                <input type="radio" name="emotion3" id="emotion3" value="emotion3B" class="form-check-input" required><label class="form-check-label">Neutral</label><br>
+                                <input type="radio" name="emotion3" id="emotion3" value="emotion3A" class="form-check-input" required><label class="form-check-label">Slightly Disagree</label><br>
+                                <input type="radio" name="emotion3" id="emotion3" value="emotion3A" class="form-check-input" required><label class="form-check-label">Disagree</label><br>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Finish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</body>

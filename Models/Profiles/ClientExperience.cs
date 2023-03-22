@@ -17,5 +17,6 @@ namespace icounselvault.Models.Profiles
         public string? HIGHER_EDU_EXPERIENCE { get; set; }
         public string? JOB_EXPERIENCE { get; set; }
         public string? PREFERED_CAREER_FIELD { get; set; }
+        public string? SURVEY_RESULT { get; set; }
     }
 }

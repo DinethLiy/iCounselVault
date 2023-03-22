@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using icounselvault.Business.Interfaces.Auth;
+using icounselvault.Business.Services.Auth;
+using icounselvault.Business.Interfaces.Client;
+using icounselvault.Business.Services.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +53,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddHttpContextAccessor();
+
+// Interface-Service Initialization
+// Auth
+builder.Services.AddScoped<IAuthService, AuthService>();
+// Client
+builder.Services.AddScoped<IClientSurveyService, ClientSurveyService>();
 
 // Add services to the app
 var app = builder.Build();
