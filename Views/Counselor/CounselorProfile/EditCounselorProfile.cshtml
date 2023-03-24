@@ -1,4 +1,5 @@
-﻿@{
+﻿@using icounselvault.Utility
+@{
     ViewData["Title"] = "Edit Profile";
     dynamic? loggedInCounselor = TempData["loggedInCounselor"];
 }
@@ -25,7 +26,7 @@
                             <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInCounselor.NAME" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Date of Birth: @loggedInCounselor.DOB</label><br>
+                            <label class="form-label">Date of Birth: @loggedInCounselor.DOB.ToString("dd/MM/yyyy")</label><br>
                             <label class="form-label">This cannot be edited</label>
                         </div>
                         <div class="mb-3">
@@ -42,7 +43,19 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Country</label>
-                            <input type="text" name="Country" id="Country" placeholder="Your Country.." value="@loggedInCounselor.COUNTRY" class="form-control">
+                            <select name="Country" id="Country" class="custom-select">
+                                @foreach (var country in Enum.GetValues(typeof(AppConstants.Countries)))
+                                {
+                                    if (country.ToString() == loggedInCounselor.COUNTRY)
+                                    {
+                                        <option value="@country" selected="selected">@country</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@country">@country</option>
+                                    }
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Contact Number</label>
@@ -98,7 +111,13 @@ else
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Country</label>
-                            <input type="text" name="Country" id="Country" placeholder="Your Country.." class="form-control">
+                            <select name="Country" id="Country" class="custom-select">
+                                <option value="all" selected>All</option>
+                                @foreach (var country in Enum.GetValues(typeof(AppConstants.Countries)))
+                                {
+                                    <option value="@country">@country</option>
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Contact Number</label>

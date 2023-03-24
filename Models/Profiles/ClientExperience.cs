@@ -18,5 +18,7 @@ namespace icounselvault.Models.Profiles
         public string? JOB_EXPERIENCE { get; set; }
         public string? PREFERED_CAREER_FIELD { get; set; }
         public string? SURVEY_RESULT { get; set; }
+        [Required]
+        public int SURVEY_TAKEN_AMOUNT { get; set; }
     }
 }

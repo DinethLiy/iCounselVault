@@ -1,4 +1,5 @@
-﻿@{
+﻿@using icounselvault.Utility
+@{
     ViewData["Title"] = "Edit Profile";
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
     dynamic? loggedInClient = TempData["loggedInClient"];
@@ -23,7 +24,7 @@
                         <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInClient.NAME" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Date of Birth: @loggedInClient.DOB</label><br>
+                        <label class="form-label">Date of Birth: @loggedInClient.DOB.ToString("dd/MM/yyyy")</label><br>
                         <label class="form-label">This cannot be edited</label>
                     </div>
                     <div class="mb-3">
@@ -40,7 +41,19 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Country</label>
-                        <input type="text" name="Country" id="Country" placeholder="Your Country.." value="@loggedInClient.COUNTRY" class="form-control">
+                        <select name="Country" id="Country" class="custom-select">
+                            @foreach (var country in Enum.GetValues(typeof(AppConstants.Countries)))
+                            {
+                                if (country.ToString() == loggedInClient.COUNTRY)
+                                {
+                                            <option value="@country" selected="selected">@country</option>
+                                }
+                                else
+                                {
+                                            <option value="@country">@country</option>
+                                }
+                            }
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Contact Number</label>

@@ -1,0 +1,39 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Client Questionnaire Usage Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Client Questionnaire Usage Report</h1>
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Report Parameters</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("DownloadSurveyCountReport", "Report")" method="post" class="form-group">
+                    <div class="mb-3">
+                        <label class="form-label">Client has taken the questionnaire more than... times</label>
+                        <input type="number" name="takenTimes" id="takenTimes" min="0" max="999" step="1" value="0" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Filter by Country</label>
+                        <select name="country" id="country" class="custom-select">
+                            <option value="all" selected>All</option>
+                            @foreach (var country in Enum.GetValues(typeof(AppConstants.Countries)))
+                            {
+                                <option value="@country">@country</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

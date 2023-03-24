@@ -1,0 +1,39 @@
+﻿@using icounselvault.Utility
+@{
+    ViewData["Title"] = "Counsel Requests Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<body>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Client-to-Counselor Counsel Requests Report</h1>
+    </div>
+
+    <!-- Form Card -->
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Report Parameters</h6>
+            </div>
+            <div class="card-body">
+                <form action="@Url.Action("DownloadCounselRequestsReport", "Report")" method="post" class="form-group">
+                    <div class="mb-3">
+                        <label class="form-label">Requests Created After (optional)</label>
+                        <input type="date" name="createdAfter" id="createdAfter" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Filter by Status</label>
+                        <select name="status" id="status" class="custom-select">
+                            <option value="all" selected>All</option>
+                            @foreach (var status in Enum.GetValues(typeof(AppConstants.RequestStatuses)))
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

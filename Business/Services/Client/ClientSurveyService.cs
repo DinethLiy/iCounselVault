@@ -58,6 +58,7 @@ namespace icounselvault.Business.Services.Client
                 .Where(cle => cle.client == foundClient)
                 .FirstOrDefault();
             clientExperience.SURVEY_RESULT = finalSurveyResult;
+            clientExperience.SURVEY_TAKEN_AMOUNT += 1;
             _context.SaveChanges();
 
             // Return Survey result

@@ -10,6 +10,8 @@ using icounselvault.Business.Interfaces.Auth;
 using icounselvault.Business.Services.Auth;
 using icounselvault.Business.Interfaces.Client;
 using icounselvault.Business.Services.Client;
+using icounselvault.Business.Interfaces.Admin;
+using icounselvault.Business.Services.Admin;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +59,8 @@ builder.Services.AddHttpContextAccessor();
 // Interface-Service Initialization
 // Auth
 builder.Services.AddScoped<IAuthService, AuthService>();
+// Admin
+builder.Services.AddScoped<IReportService, ReportService>();
 // Client
 builder.Services.AddScoped<IClientSurveyService, ClientSurveyService>();
 

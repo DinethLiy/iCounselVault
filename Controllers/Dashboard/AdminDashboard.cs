@@ -35,5 +35,30 @@ namespace icounselvault.Controllers.Dashboard
         {
             return RedirectToAction("ViewCounselRequests", "ManageCounselRequests");
         }
+
+        public RedirectToActionResult ShowSurveyCountReport()
+        {
+            return RedirectToAction("ViewSurveyCountReport", "Report");
+        }
+
+        public RedirectToActionResult ShowCounselRequestsReport()
+        {
+            return RedirectToAction("ViewCounselRequestsReport", "Report");
+        }
+
+        public RedirectToActionResult ShowDataInsertRequestsReport()
+        {
+            return RedirectToAction("ViewDataInsertRequestsReport", "Report");
+        }
+
+        public RedirectToActionResult ShowCounselorActivityReport()
+        {
+            return RedirectToAction("ViewCounselorActivityReport", "Report");
+        }
+
+        public RedirectToActionResult ShowClientActivityReport()
+        {
+            return RedirectToAction("ViewClientActivityReport", "Report");
+        }
     }
 }
