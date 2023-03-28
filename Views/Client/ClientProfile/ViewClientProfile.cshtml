@@ -16,14 +16,15 @@
                 <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3"><label class="form-label">Name: @loggedInClient.NAME</label></div>
-                    <div class="mb-3"><label class="form-label">Date of Birth: @loggedInClient.DOB</label></div>
-                    <div class="mb-3"><label class="form-label">Gender: @loggedInClient.GENDER</label></div>
-                    <div class="mb-3"><label class="form-label">NIC: @loggedInClient.NIC</label></div>
-                    <div class="mb-3"><label class="form-label">Primary Address: @loggedInClient.ADDRESS</label></div>
-                    <div class="mb-3"><label class="form-label">Country: @loggedInClient.COUNTRY</label></div>
-                    <div class="mb-3"><label class="form-label">Contact Number: @loggedInClient.CONTACT_NUM</label></div>
-                    <div class="mb-3"><label class="form-label">Email: @loggedInClient.EMAIL</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Unique Code</p>@loggedInClient.CLIENT_CODE.ToString()</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Name</p>@loggedInClient.NAME</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@loggedInClient.DOB.ToString("dd/MM/yyyy")</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Gender</p>@loggedInClient.GENDER</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">NIC</p>@loggedInClient.NIC</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Primary Address</p>@loggedInClient.ADDRESS</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@loggedInClient.COUNTRY</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@loggedInClient.CONTACT_NUM</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Email</p>@loggedInClient.EMAIL</label></div>
                     <div class="mb-3">
                         <a class="btn btn-info btn-icon-split" asp-action="ShowEditClientProfile" asp-controller="ClientProfile">
                             <span class="text">Edit</span>

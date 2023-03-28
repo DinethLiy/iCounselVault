@@ -24,15 +24,29 @@
                         <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInClient.NAME" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Date of Birth: @loggedInClient.DOB.ToString("dd/MM/yyyy")</label><br>
+                        <label class="form-label">Date of Birth</label><br>
+                        <input type="text" value="@loggedInClient.DOB.ToString("dd/MM/yyyy")" class="form-control" disabled><br>
                         <label class="form-label">This cannot be edited</label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Gender</label>
-                        <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." value="@loggedInClient.GENDER" class="form-control">
+                        <select name="Gender" id="Gender" class="custom-select">
+                            @foreach (var gender in Enum.GetValues(typeof(AppConstants.Genders)))
+                            {
+                                if (gender.ToString() == loggedInClient.GENDER)
+                                {
+                                    <option value="@gender" selected="selected">@gender</option>
+                                }
+                                else
+                                {
+                                    <option value="@gender">@gender</option>
+                                }
+                            }
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">NIC: @loggedInClient.NIC</label><br>
+                        <label class="form-label">NIC</label><br>
+                        <input type="text" value="@loggedInClient.NIC" class="form-control" disabled><br>
                         <label class="form-label">This cannot be edited</label>
                     </div>
                     <div class="mb-3">
@@ -63,7 +77,7 @@
                         <label class="form-label">Email Address</label>
                         <input type="Email" name="Email" id="email" placeholder="Your Email.." value="@loggedInClient.EMAIL" class="form-control">
                     </div>
-                    <label class="form-label">Your contact details will only be shared with Counsellors that you request guidance from.</label><br>
+                    <label class="form-label">Your contact details will only be shared with Counselors that you request guidance from.</label><br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

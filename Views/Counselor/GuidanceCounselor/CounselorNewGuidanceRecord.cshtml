@@ -2,6 +2,8 @@
     ViewData["Title"] = "New Guidance Record";
     Layout = "~/Views/Shared/_CounselorLayout.cshtml";
     dynamic? foundClient = TempData["foundClient"];
+    dynamic? foundClientGuidance = TempData["foundClientGuidance"];
+    dynamic? foundClientExperience = TempData["foundClientExperience"];
     dynamic? satisfactionList = TempData["satisfactionList"];
 }
 <body>
@@ -62,8 +64,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Date of Counseling</label>
-                            <input type="date" name="createdDate" id="createdDate" placeholder="Counseling Date" class="date">
+                            <label class="form-label">Date of Counseling</label><br>
+                            <input type="date" name="createdDate" id="createdDate" placeholder="Counseling Date" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -74,14 +76,81 @@
         <!-- Client Card -->
         <div class="col">
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <a href="#clientCard" class="d-block card-header py-3" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="clientCard">
                     <h6 class="m-0 font-weight-bold text-primary">Client Details</h6>
-                </div>
+                </a>
+                <div class="collapse show" id="clientCard">
                 <div class="card-body">
-                    <div class="mb-3"><label class="form-label">Client: @foundClient.NAME</label></div>
-                    <div class="mb-3"><label class="form-label">Country: @foundClient.COUNTRY</label></div>
-                    <div class="mb-3"><label class="form-label">Contact Number: @foundClient.CONTACT_NUM</label></div>
-                    <div class="mb-3"><label class="form-label">Email: @foundClient.EMAIL</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Client</p>@foundClient.NAME</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@foundClient.COUNTRY</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@foundClient.CONTACT_NUM</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Email</p>@foundClient.EMAIL</label></div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        @if (foundClientExperience != null)
+        {
+            <!-- Client Experience Card -->
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <a href="#clientExperienceCard" class="d-block card-header py-3" data-toggle="collapse"
+                            role="button" aria-expanded="true" aria-controls="clientExperienceCard">
+                        <h6 class="m-0 font-weight-bold text-primary">Client Experience</h6>
+                    </a>
+                    <div class="collapse show" id="clientExperienceCard">
+                        <div class="card-body">
+                            <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">School</p>@foundClientExperience.SCHOOL_EXPERIENCE</label></div>
+                            <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Higher Education</p>@foundClientExperience.HIGHER_EDU_EXPERIENCE</label></div>
+                            <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Career</p>@foundClientExperience.JOB_EXPERIENCE</label></div>
+                            <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Survey Result</p>@foundClientExperience.SURVEY_RESULT</label></div>
+                            <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Prefered Career Path</p>@foundClientExperience.PREFERED_CAREER_FIELD</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Client History Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <a href="#clientGuidanceCard" class="d-block card-header py-3" data-toggle="collapse"
+               role="button" aria-expanded="true" aria-controls="clientGuidanceCard">
+                    <h6 class="m-0 font-weight-bold text-primary">Client's History with Career Guidance</h6>
+                </a>
+                <div class="collapse show" id="clientGuidanceCard">
+                    <div class="card-body">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Source</th>
+                                    <th>Guidance Advice</th>
+                                    <th>Satisfaction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var guidanceHistory in foundClientGuidance)
+                                {
+                                    <tr>
+                                        <td>@guidanceHistory.CREATED_DATE</td>
+                                        @if (guidanceHistory.EXTERNAL_GUIDANCE_SOURCE == null)
+                                        {
+                                            <td>iCounselVault Counselor</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@guidanceHistory.EXTERNAL_GUIDANCE_SOURCE</td>
+                                        }
+                                        <td>@guidanceHistory.GUIDANCE_ADVICE</td>
+                                        <td>@guidanceHistory.CLIENT_SATISFACTION</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

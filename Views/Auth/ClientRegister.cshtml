@@ -36,9 +36,14 @@
             <span class="far fa-calendar"></span>
             <input type="date" name="DateOfBirth" id="DateOfBirth" placeholder="Date of Birth">
         </div>
-        <div class="form-field d-flex align-items-center">
-            <span class="far fa-user"></span>
-            <input type="text" name="Gender" id="Gender" placeholder="Gender">
+        <div class="mb-4">
+            <label>Gender</label>
+            <select name="Gender" id="Gender" class="form-control form-control-sm">
+                    @foreach (var gender in Enum.GetValues(typeof(AppConstants.Genders)))
+                    {
+                            <option value="@gender">@gender</option>
+                    }
+            </select>
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="far fa-id-card"></span>

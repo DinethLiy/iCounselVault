@@ -1,4 +1,5 @@
 ﻿using icounselvault.Models.Counseling;
+using icounselvault.Models.Profiles;
 using icounselvault.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -37,9 +38,18 @@ namespace icounselvault.Controllers.Counselor
             var foundClient = _context.CLIENT
                 .Where(cl => cl.CLIENT_CODE.ToString() == code)
                 .FirstOrDefault();
+            List<ClientGuidanceHistory> foundGuidance = new();
+            foundGuidance = _context.CLIENT_GUIDANCE_HISTORY
+                .Include(cgh => cgh.client)
+                .Where(cgh => cgh.client == foundClient && cgh.HISTORY_STATUS != "INA")
+                .ToList();
+            var foundExperience = _context.CLIENT_EXPERIENCE
+                .Include(cle => cle.client)
+                .Where(cle => cle.client == foundClient)
+                .FirstOrDefault();
             if (foundClient != null)
             {
-                SetTempDataForCounselorNewGuidanceHistory(foundClient);
+                SetTempDataForCounselorNewGuidanceHistory(foundClient, foundGuidance, foundExperience);
                 return View("../../Views/Counselor/GuidanceCounselor/CounselorNewGuidanceRecord");
             }
             else 
@@ -118,9 +128,11 @@ namespace icounselvault.Controllers.Counselor
                 .FirstOrDefault();
         }
 
-        public void SetTempDataForCounselorNewGuidanceHistory(Models.Profiles.Client foundClient)
+        public void SetTempDataForCounselorNewGuidanceHistory(Models.Profiles.Client foundClient, List<ClientGuidanceHistory> foundGuidance, ClientExperience? foundExperience)
         {
             TempData["foundClient"] = foundClient;
+            TempData["foundClientGuidance"] = foundGuidance;
+            TempData["foundClientExperience"] = foundExperience;
             TempData["satisfactionList"] = new List<String>()
             {
                 "Very satisfied", "Satisfied but had doubts", "Doubtful",

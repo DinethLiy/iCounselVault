@@ -26,15 +26,29 @@
                             <input type="text" name="Name" id="Name" placeholder="Your Name.." value="@loggedInCounselor.NAME" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Date of Birth: @loggedInCounselor.DOB.ToString("dd/MM/yyyy")</label><br>
+                            <label class="form-label">Date of Birth</label><br>
+                            <input type="text" value="@loggedInCounselor.DOB.ToString("dd/MM/yyyy")" class="form-control" disabled><br>
                             <label class="form-label">This cannot be edited</label>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
-                            <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." value="@loggedInCounselor.GENDER" class="form-control">
+                            <select name="Gender" id="Gender" class="custom-select">
+                                @foreach (var gender in Enum.GetValues(typeof(AppConstants.Genders)))
+                                {
+                                    if (gender.ToString() == loggedInCounselor.GENDER)
+                                    {
+                                        <option value="@gender" selected="selected">@gender</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@gender">@gender</option>
+                                    }
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">NIC: @loggedInCounselor.NIC</label><br>
+                            <label class="form-label">NIC</label><br>
+                            <input type="text" value="@loggedInCounselor.NIC" class="form-control" disabled><br>
                             <label class="form-label">This cannot be edited</label>
                         </div>
                         <div class="mb-3">
@@ -100,6 +114,15 @@ else
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
                             <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <select name="Gender" id="Gender" class="custom-select">
+                                @foreach (var gender in Enum.GetValues(typeof(AppConstants.Genders)))
+                                {
+                                    <option value="@gender">@gender</option>
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">NIC</label><br>

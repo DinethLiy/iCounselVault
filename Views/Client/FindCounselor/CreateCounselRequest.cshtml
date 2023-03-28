@@ -17,12 +17,12 @@
                 <h6 class="m-0 font-weight-bold text-primary">Counselor Details</h6>
             </div>
             <div class="card-body">
-                <div class="mb-3"><label class="form-label">Counselor: @counselor.NAME</label></div>
-                <div class="mb-3"><label class="form-label">Date of Birth: @counselor.DOB</label></div>
-                <div class="mb-3"><label class="form-label">Gender: @counselor.GENDER</label></div>
-                <div class="mb-3"><label class="form-label">Country: @counselor.COUNTRY</label></div>
-                <div class="mb-3"><label class="form-label">Contact Number: @counselor.CONTACT_NUM</label></div>
-                <div class="mb-3"><label class="form-label">Email: @counselor.EMAIL</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Counselor</p>@counselor.NAME</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@counselor.DOB</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Gender</p>@counselor.GENDER</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@counselor.COUNTRY</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@counselor.CONTACT_NUM</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Email</p>@counselor.EMAIL</label></div>
             </div>
         </div>
     </div>
@@ -37,11 +37,11 @@
                 <form action="@Url.Action("AddCounselRequest", "ClientCounselRequests")" method="post" class="form-group">
                     <input type="hidden" name="counselorId" id="counselorId" value="@counselor.COUNSELOR_ID">
                     <div class="mb-3">
-                        <label class="form-label">Start Date of Possible Date Range for Counselling</label>
+                        <label class="form-label">Start Date of Possible Date Range for Counseling</label>
                         <input type="date" name="StartDate" id="StartDate" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">End Date of Possible Date Range for Counselling</label>
+                        <label class="form-label">End Date of Possible Date Range for Counseling</label>
                         <input type="date" name="EndDate" id="EndDate" class="form-control">
                     </div>
                     <label class="form-label">You may provide the same date as the Starting Date and Ending Date</label><br>

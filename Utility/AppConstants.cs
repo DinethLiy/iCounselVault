@@ -21,6 +21,14 @@
             REJECTED
         }
 
+        public enum Genders 
+        {
+            Male,
+            Female,
+            NonBinary,
+            Other,
+        }
+
         public enum Countries
         {
             Afghanistan,

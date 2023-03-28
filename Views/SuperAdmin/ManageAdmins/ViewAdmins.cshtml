@@ -7,13 +7,14 @@
 <body>
     <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Manage Admins</h1> 
-        </div>
-    
-    <div class="col">
+        <h1 class="h3 mb-0 text-gray-800">Manage Admins</h1>
         <a class="btn btn-success btn-icon-split" asp-action="ShowAddEditAdmin" asp-route-userId=0 asp-route-encryptedPassword="-1" asp-controller="ManageAdmins">
             <span class="text">Create Admin</span>
         </a>
+        </div>
+    
+    <div class="col">
+        
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Admins</h6>

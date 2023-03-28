@@ -19,12 +19,12 @@
                     <h6 class="m-0 font-weight-bold text-primary">You've already requested guidance from a counselor</h6>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3"><label class="form-label">Counselor: @counselRequest.counselor.NAME</label></div>
-                    <div class="mb-3"><label class="form-label">Date of Birth: @counselRequest.counselor.DOB</label></div>
-                    <div class="mb-3"><label class="form-label">Gender: @counselRequest.counselor.GENDER</label></div>
-                    <div class="mb-3"><label class="form-label">Country: @counselRequest.counselor.COUNTRY</label></div>
-                    <div class="mb-3"><label class="form-label">Contact Number: @counselRequest.counselor.CONTACT_NUM</label></div>
-                    <div class="mb-3"><label class="form-label">Email: @counselRequest.counselor.EMAIL</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Counselor</p>@counselRequest.counselor.NAME</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@counselRequest.counselor.DOB.ToString("dd/MM/yyyy")</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Gender</p>@counselRequest.counselor.GENDER</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@counselRequest.counselor.COUNTRY</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@counselRequest.counselor.CONTACT_NUM</label></div>
+                    <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Email</p>@counselRequest.counselor.EMAIL</label></div>
                 </div>
             </div>
         </div>
