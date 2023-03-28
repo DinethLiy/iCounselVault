@@ -85,7 +85,7 @@ app.UseSession();
 // Set initial view
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Run the application
 app.Run();

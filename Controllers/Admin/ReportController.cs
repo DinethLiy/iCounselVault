@@ -12,26 +12,31 @@ namespace icounselvault.Controllers.Admin
             _reportService = reportService;
         }
 
+        [Route("Reports/Generate-Survey-Usage-Report")]
         public IActionResult ViewSurveyCountReport()
         {
             return View("../../Views/Admin/Reports/SurveyCountReport");
         }
 
+        [Route("Reports/Generate-Counsel-Request-Report")]
         public IActionResult ViewCounselRequestsReport()
         {
             return View("../../Views/Admin/Reports/CounselRequestsReport");
         }
 
+        [Route("Reports/Generate-Data-Request-Report")]
         public IActionResult ViewDataInsertRequestsReport()
         {
             return View("../../Views/Admin/Reports/DataInsertRequestsReport");
         }
 
+        [Route("Reports/Generate-Counselor-Activity-Report")]
         public IActionResult ViewCounselorActivityReport()
         {
             return View("../../Views/Admin/Reports/CounselorActivityReport");
         }
 
+        [Route("Reports/Generate-Client-Activity-Report")]
         public IActionResult ViewClientActivityReport()
         {
             return View("../../Views/Admin/Reports/ClientActivityReport");
