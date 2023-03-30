@@ -1,4 +1,5 @@
 ﻿using icounselvault.Utility;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,19 +13,33 @@ namespace icounselvault.Controllers.SuperAdmin
             _context = context;
         }
 
-        public IActionResult ViewClients()
+        [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
+        public IActionResult SuperAdminViewClients()
         {
-            var clients = _context.CLIENT
-                .Include(c => c.user)
-                .ToList();
-            return View("../../Views/SuperAdmin/ManageClients/ViewClients", clients);
+            TempData["layout"] = "../../Views/Shared/_SuperAdminLayout";
+            return View("../../Views/SuperAdmin/ManageClients/ViewClients", GetClientList());
         }
 
-        public IActionResult ShowEditClient(int clientId)
+        [Authorization(RequiredPrivilegeType = "ADMIN")]
+        public IActionResult AdminViewClients()
         {
-            TempData["selectedClient"] = _context.CLIENT
-                .Where(cl => cl.CLIENT_ID == clientId)
-                .FirstOrDefault();
+            TempData["layout"] = "../../Views/Shared/_AdminLayout";
+            return View("../../Views/SuperAdmin/ManageClients/ViewClients", GetClientList());
+        }
+
+        [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
+        public IActionResult SuperAdminShowEditClient(int clientId)
+        {
+            SetEditClientTempData(clientId);
+            TempData["layout"] = "../../Views/Shared/_SuperAdminLayout";
+            return View("../../Views/SuperAdmin/ManageClients/EditClient");
+        }
+
+        [Authorization(RequiredPrivilegeType = "ADMIN")]
+        public IActionResult AdminShowEditClient(int clientId)
+        {
+            SetEditClientTempData(clientId);
+            TempData["layout"] = "../../Views/Shared/_AdminLayout";
             return View("../../Views/SuperAdmin/ManageClients/EditClient");
         }
 
@@ -40,6 +55,20 @@ namespace icounselvault.Controllers.SuperAdmin
                 .Include(c => c.user)
                 .ToList();
             return View("../../Views/SuperAdmin/ManageClients/ViewClients", clients);
+        }
+
+        private List<Models.Profiles.Client> GetClientList() 
+        {
+            return _context.CLIENT
+                .Include(c => c.user)
+                .ToList();
+        }
+
+        private void SetEditClientTempData(int clientId) 
+        {
+            TempData["selectedClient"] = _context.CLIENT
+                .Where(cl => cl.CLIENT_ID == clientId)
+                .FirstOrDefault();
         }
     }
 }

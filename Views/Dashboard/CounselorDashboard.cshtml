@@ -1,11 +1,135 @@
 ﻿@{
     ViewData["Title"] = "Counselor";
     Layout = "~/Views/Shared/_CounselorLayout.cshtml";
+
+    dynamic? selfCounselRequests = TempData["selfCounselRequests"];
+    dynamic? pendingInsertRequests = TempData["pendingInsertRequests"];
+    dynamic? guidanceRecords = TempData["guidanceRecords"];
+    dynamic? counselRequests = TempData["counselRequests"];
+    dynamic? name = TempData["name"];
 }
 <body>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Counselor</h1>
+        <h1 class="h3 mb-0 text-gray-800">Welcome to iCounselVault, @name</h1>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="row">
+        <!-- Data Insert Requests card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Pending Counsel Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@selfCounselRequests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pending Data Insert Requests by User card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Your Guidance History Records waiting Client Approval
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@pendingInsertRequests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Guidance Record Count card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Guidance Records you've Created
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@guidanceRecords</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-stream fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Counsel Requests card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Your Counseling Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@counselRequests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-phone-volume fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Illustration cards -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">View Counseling Requests</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                             src="~/img/Dashboards/iCounselVault-counselor-counselRequests.svg" alt="Guidance History">
+                    </div>
+                    <p>
+                        View and Manage Counseling Requests from Clients to yourself. Click the link below to get started
+                    </p>
+                    <a asp-controller="CounselorDashboard" asp-action="ShowCounselRequests">
+                        Click here to view your Counsel Requests
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Career Counseling History</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                             src="~/img/Dashboards/iCounselVault-counselor-guidanceHistory.svg" alt="Find a Counselor">
+                    </div>
+                    <p>
+                        View your History of Career Guidance through iCounselVault and add new Counseling History records to clients
+                    </p>
+                    <a asp-controller="CounselorDashboard" asp-action="ShowCounselorGuidanceHistory">
+                        Click here to view your Counseling History
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Navigation Card -->
@@ -16,9 +140,14 @@
             </div>
             <div class="card-body">
                 <!-- Navigation Buttons -->
+                <h6 class="h5 mb-0 text-gray-800">Manage Your Profile Details</h6><br>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="CounselorDashboard" asp-action="ShowCounselorProfile">
                     <i class="fas fa-house-user fa-fw me-3"></i>Your Profile
                 </a>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="CounselorExperience" asp-action="ShowCounselorExperience">
+                    <i class="far fa-address-card fa-fw me-3"></i>Your Past Experiences
+                </a><br><br>
+                <h6 class="h5 mb-0 text-gray-800">iCounselVault Services</h6><br>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="CounselorDashboard" asp-action="ShowCounselRequests">
                     <i class="fas fa-business-time fa-fw me-3"></i>Manage Guidance Counselling Requests
                 </a>

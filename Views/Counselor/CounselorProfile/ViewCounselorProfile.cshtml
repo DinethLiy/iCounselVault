@@ -19,13 +19,12 @@
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Name</p>@loggedInCounselor.NAME</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@loggedInCounselor.DOB.ToString("dd/MM/yyyy")</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Gender</p>@loggedInCounselor.GENDER</label></div>
-                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">NIC</p>@loggedInCounselor.NIC</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Primary Address</p>@loggedInCounselor.ADDRESS</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@loggedInCounselor.COUNTRY</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@loggedInCounselor.CONTACT_NUM</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Email</p>@loggedInCounselor.EMAIL</label></div>
                 <div class="mb-3">
-                    <a class="btn btn-info btn-icon-split" asp-action="ShowEditCounselorProfile" asp-controller="CounselorProfile">
+                    <a class="btn btn-info btn-icon-split" asp-action="Index" asp-controller="CounselorProfile">
                         <span class="text">Edit</span>
                     </a>
                 </div>

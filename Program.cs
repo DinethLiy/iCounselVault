@@ -12,6 +12,8 @@ using icounselvault.Business.Interfaces.Client;
 using icounselvault.Business.Services.Client;
 using icounselvault.Business.Interfaces.Admin;
 using icounselvault.Business.Services.Admin;
+using icounselvault.Business.Interfaces.Dashboard;
+using icounselvault.Business.Services.Dashboard;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +65,12 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 // Client
 builder.Services.AddScoped<IClientSurveyService, ClientSurveyService>();
+// Dashboards
+builder.Services.AddScoped<ISuperAdminDashboardService, SuperAdminDashboardService>();
+builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+builder.Services.AddScoped<ICounselorDashboardService, CounselorDashboardService>();
+builder.Services.AddScoped<IClientDashboardService, ClientDashboardService>();
+
 
 // Add services to the app
 var app = builder.Build();

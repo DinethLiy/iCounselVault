@@ -1,19 +1,23 @@
 ﻿using icounselvault.Utility.Auth;
 using icounselvault.Utility;
 using Microsoft.AspNetCore.Mvc;
+using icounselvault.Business.Interfaces.Dashboard;
+using System.Collections;
 
 namespace icounselvault.Controllers.Dashboard
 {
     public class SuperAdminDashboardController : Controller
     {
-        private readonly AppDbContext _context;
-        public SuperAdminDashboardController(AppDbContext context)
+        private readonly ISuperAdminDashboardService _superAdminDashboardService;
+
+        public SuperAdminDashboardController(ISuperAdminDashboardService superAdminDashboardService)
         {
-            _context = context;
+            _superAdminDashboardService = superAdminDashboardService;
         }
 
         public IActionResult Index()
         {
+            SetTempDataForSuperAdminDashboard();
             return View("../../Views/Dashboard/SuperAdminDashboard");
         }
 
@@ -24,12 +28,21 @@ namespace icounselvault.Controllers.Dashboard
 
         public RedirectToActionResult ShowCounselors()
         {
-            return RedirectToAction("ViewCounselors", "ManageCounselors");
+            return RedirectToAction("SuperAdminViewCounselors", "ManageCounselors");
         }
 
         public RedirectToActionResult ShowClients()
         {
-            return RedirectToAction("ViewClients", "ManageClients");
+            return RedirectToAction("SuperAdminViewClients", "ManageClients");
+        }
+
+        private void SetTempDataForSuperAdminDashboard() 
+        {
+            ArrayList resultList = _superAdminDashboardService.GetDataForSuperAdminDashboard();
+            TempData["superCount"] = (string)resultList[0];
+            TempData["adminCount"] = (string)resultList[1];
+            TempData["clientCount"] = (string)resultList[2];
+            TempData["counselorCount"] = (string)resultList[3];
         }
     }
 }

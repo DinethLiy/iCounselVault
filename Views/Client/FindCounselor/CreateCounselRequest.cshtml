@@ -2,6 +2,7 @@
     ViewData["Title"] = "Create Counsel Request";
     Layout = "~/Views/Shared/_ClientLayout.cshtml";
     dynamic? counselor = TempData["counselor"];
+    dynamic? counselorExperience = TempData["counselorExperience"];
 }
 <body>
     <!-- Page Heading -->
@@ -18,7 +19,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Counselor</p>@counselor.NAME</label></div>
-                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@counselor.DOB</label></div>
+                <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Date of Birth</p>@counselor.DOB.ToString("dd/MM/yyyy")</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Gender</p>@counselor.GENDER</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Country</p>@counselor.COUNTRY</label></div>
                 <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Contact Number</p>@counselor.CONTACT_NUM</label></div>
@@ -26,6 +27,26 @@
             </div>
         </div>
     </div>
+
+    @if (counselorExperience != null)
+    {
+        <!-- Counselor Experience Card -->
+        <div class="col">
+            <div class="card shadow mb-4">
+                <a href="#counselorExperienceCard" class="d-block card-header py-3" data-toggle="collapse"
+               role="button" aria-expanded="true" aria-controls="counselorExperienceCard">
+                    <h6 class="m-0 font-weight-bold text-primary">Counselor's Past Experiences</h6>
+                </a>
+                <div class="collapse show" id="counselorExperienceCard">
+                    <div class="card-body">
+                        <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">School Experience</p>@counselorExperience.SCHOOL_EXPERIENCE</label></div>
+                        <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Higher Education</p>@counselorExperience.HIGHER_EDU_EXPERIENCE</label></div>
+                        <div class="mb-3"><label class="form-label"><p class="lead text-gray-900">Career</p>@counselorExperience.JOB_EXPERIENCE</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     <!-- Form Card -->
     <div class="col">

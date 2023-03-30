@@ -25,8 +25,30 @@ namespace icounselvault.Controllers.Auth
             return View("Login");
         }
 
+        public IActionResult IncorrectLogin() 
+        {
+            ModelState.AddModelError("", "Invalid username or password");
+            return View("Login");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            ModelState.AddModelError("", "Access Denied");
+            // Cookie containing JWT Auth key is destroyed at logout.
+            Response.Cookies.Delete("access_token");
+            return View("Login");
+        }
+
+        public IActionResult Logout()
+        {
+            ModelState.AddModelError("", "Logged out Successfully!");
+            // Cookie containing JWT Auth key is destroyed at logout.
+            Response.Cookies.Delete("access_token");
+            return View("Login");
+        }
+
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public RedirectToActionResult Login(string username, string password)
         {
             EncryptDecryptText encryptDecryptText = new();
             string encryptedPassword = "";
@@ -41,12 +63,11 @@ namespace icounselvault.Controllers.Auth
             if (foundAccount != null) 
             {
                 string? role = LoggedInUserAuthentication(foundAccount);
-                return View(RedirectToDashboard(foundAccount, role));
+                return RedirectToAction("Index", RedirectToDashboard(foundAccount, role));
             }            
             else 
             {
-                ModelState.AddModelError("", "Invalid username or password");
-                return View("Login");
+                return RedirectToAction("IncorrectLogin", "Auth");
             }
         }
 
@@ -71,11 +92,11 @@ namespace icounselvault.Controllers.Auth
         {
             if (role == "SUPER_ADMIN")
             {
-                return "../../Views/Dashboard/SuperAdminDashboard";
+                return "SuperAdminDashboard";
             }
             else if (role == "ADMIN")
             {
-                return "../../Views/Dashboard/AdminDashboard";
+                return "AdminDashboard";
             }
             else if (role == "COUNSELOR")
             {
@@ -83,7 +104,7 @@ namespace icounselvault.Controllers.Auth
             }
             else
             {
-                return "../../Views/Dashboard/ClientDashboard";
+                return "ClientDashboard";
             }
         }
 
@@ -95,11 +116,11 @@ namespace icounselvault.Controllers.Auth
                         .FirstOrDefault();
             if (foundCounselor != null)
             {
-                return "../../Views/Dashboard/CounselorDashboard";
+                return "CounselorDashboard";
             }
             else
             {
-                return "../../Views/Counselor/CounselorProfile/EditCounselorProfile";
+                return "CounselorProfile";
             }
         }
 
@@ -109,7 +130,7 @@ namespace icounselvault.Controllers.Auth
         }
 
         [HttpPost]
-        public IActionResult AddClient(string Username, string Password, string ConfirmPassword, string Name, string DateOfBirth, string Gender, string NIC, string Address, string Country, string Contact, string Email) 
+        public IActionResult AddClient(string Username, string Password, string ConfirmPassword, string Name, string DateOfBirth, string Gender, string Address, string Country, string Contact, string Email) 
         {
             EncryptDecryptText encryptDecryptText = new();
             if (Username != null && Password != null && ConfirmPassword == Password)
@@ -136,7 +157,6 @@ namespace icounselvault.Controllers.Auth
                     NAME = Name,
                     DOB = DateTime.Parse(DateOfBirth),
                     GENDER = Gender,
-                    NIC = NIC,
                     ADDRESS = Address,
                     COUNTRY = Country,
                     CONTACT_NUM = Contact,

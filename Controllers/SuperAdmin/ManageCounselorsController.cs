@@ -1,4 +1,5 @@
 ﻿using icounselvault.Models.Auth;
+using icounselvault.Models.Profiles;
 using icounselvault.Utility;
 using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
@@ -14,32 +15,49 @@ namespace icounselvault.Controllers.SuperAdmin
             _context = context;
         }
 
-        public IActionResult ViewCounselors()
+        [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
+        public IActionResult SuperAdminViewCounselors()
         {
-            var counselors = _context.COUNSELOR
-                .Include(c => c.user)
-                .ToList();
-            return View("../../Views/SuperAdmin/ManageCounselors/ViewCounselors", counselors);
+            TempData["layout"] = "../../Views/Shared/_SuperAdminLayout";
+            return View("../../Views/SuperAdmin/ManageCounselors/ViewCounselors", GetCounselorList());
         }
 
-        public IActionResult ShowAddEditCounselorUser(int userId, string encryptedPassword)
+        [Authorization(RequiredPrivilegeType = "ADMIN")]
+        public IActionResult AdminViewCounselors()
         {
-            if (encryptedPassword != "-1")
-            {
-                EncryptDecryptText encryptDecryptText = new();
-                TempData["selectedUser"] = _context.USER
-                    .Where(u => u.USER_ID == userId)
-                    .FirstOrDefault();
-                TempData["decryptedPassword"] = encryptDecryptText.DecryptText(encryptedPassword);
-            }
+            TempData["layout"] = "../../Views/Shared/_AdminLayout";
+            return View("../../Views/SuperAdmin/ManageCounselors/ViewCounselors", GetCounselorList());
+        }
+
+        [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
+        public IActionResult SuperAdminShowAddEditCounselorUser(int userId, string encryptedPassword)
+        {
+            SetTempDataForManageCounselorUsers(userId, encryptedPassword);
+            TempData["layout"] = "../../Views/Shared/_SuperAdminLayout";
             return View("../../Views/SuperAdmin/ManageCounselors/AddEditCounselor", GetCounselorUsers());
         }
 
-        public IActionResult ShowEditCounselor(int counselorId)
+        [Authorization(RequiredPrivilegeType = "ADMIN")]
+        public IActionResult AdminShowAddEditCounselorUser(int userId, string encryptedPassword)
         {
-            TempData["selectedCounselor"] = _context.COUNSELOR
-                .Where(co => co.COUNSELOR_ID == counselorId)
-                .FirstOrDefault();
+            SetTempDataForManageCounselorUsers(userId, encryptedPassword);
+            TempData["layout"] = "../../Views/Shared/_AdminLayout";
+            return View("../../Views/SuperAdmin/ManageCounselors/AddEditCounselor", GetCounselorUsers());
+        }
+
+        [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
+        public IActionResult SuperAdminShowEditCounselor(int counselorId)
+        {
+            SetTempDataForSelectedCounselor(counselorId);
+            TempData["layout"] = "../../Views/Shared/_SuperAdminLayout";
+            return View("../../Views/SuperAdmin/ManageCounselors/AddEditCounselor");
+        }
+
+        [Authorization(RequiredPrivilegeType = "ADMIN")]
+        public IActionResult AdminShowEditCounselor(int counselorId)
+        {
+            SetTempDataForSelectedCounselor(counselorId);
+            TempData["layout"] = "../../Views/Shared/_AdminLayout";
             return View("../../Views/SuperAdmin/ManageCounselors/AddEditCounselor");
         }
 
@@ -111,6 +129,32 @@ namespace icounselvault.Controllers.SuperAdmin
             return _context.USER
                    .Where(u => u.PRIVILEGE_TYPE == "COUNSELOR")
                    .ToList();
+        }
+
+        private List<Models.Profiles.Counselor> GetCounselorList() 
+        {
+            return _context.COUNSELOR
+                .Include(c => c.user)
+                .ToList();
+        }
+
+        private void SetTempDataForSelectedCounselor(int counselorId) 
+        {
+            TempData["selectedCounselor"] = _context.COUNSELOR
+                .Where(co => co.COUNSELOR_ID == counselorId)
+                .FirstOrDefault();
+        }
+
+        private void SetTempDataForManageCounselorUsers(int userId, string encryptedPassword) 
+        {
+            if (encryptedPassword != "-1")
+            {
+                EncryptDecryptText encryptDecryptText = new();
+                TempData["selectedUser"] = _context.USER
+                    .Where(u => u.USER_ID == userId)
+                    .FirstOrDefault();
+                TempData["decryptedPassword"] = encryptDecryptText.DecryptText(encryptedPassword);
+            }
         }
     }
 }

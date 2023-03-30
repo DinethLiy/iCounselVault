@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<icounselvault.Models.Profiles.Client>
 @{
     ViewData["Title"] = "View Clients";
-    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+    dynamic? layoutPath = TempData["layout"];
+    Layout = layoutPath;
     int clientID = 0;
 }
 <body>
@@ -25,7 +26,6 @@
                             <th>Name</th>
                             <th>DOB</th>
                             <th>Gender</th>
-                            <th>NIC</th>
                             <th>Address</th>
                             <th>Country</th>
                             <th>Contact</th>
@@ -45,7 +45,6 @@
                                 <td>@client.NAME</td>
                                 <td>@client.DOB</td>
                                 <td>@client.GENDER</td>
-                                <td>@client.NIC</td>
                                 <td>@client.ADDRESS</td>
                                 <td>@client.COUNTRY</td>
                                 <td>@client.CONTACT_NUM</td>
@@ -53,9 +52,14 @@
                                 <td>@client.CLIENT_STATUS</td>
                                 <td>
                                     <center>
-                                        <a class="btn btn-info btn-icon-split" asp-action="ShowEditClient" asp-route-clientId=@client.CLIENT_ID asp-controller="ManageClients">
-                                        <span class="text">Edit</span>
-                                    </a>
+                                        @if (layoutPath == "../../Views/Shared/_SuperAdminLayout")
+                                        {
+                                            <a class="btn btn-info btn-icon-split" asp-action="SuperAdminShowEditClient" asp-route-clientId=@client.CLIENT_ID asp-controller="ManageClients"><span class="text">Edit</span></a>
+                                        }
+                                        else 
+                                        {
+                                            <a class="btn btn-info btn-icon-split" asp-action="AdminShowEditClient" asp-route-clientId=@client.CLIENT_ID asp-controller="ManageClients"><span class="text">Edit</span></a>
+                                        }
                                     </center>
                                 </td>
                             </tr>

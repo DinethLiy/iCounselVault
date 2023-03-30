@@ -1,8 +1,10 @@
 ﻿using icounselvault.Business.Interfaces.Client;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icounselvault.Controllers.Client
 {
+    [Authorization(RequiredPrivilegeType = "CLIENT")]
     public class ClientSurveyController : Controller
     {
         private readonly IClientSurveyService _clientSurveyService;

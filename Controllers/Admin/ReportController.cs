@@ -1,8 +1,10 @@
 ﻿using icounselvault.Business.Interfaces.Admin;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace icounselvault.Controllers.Admin
 {
+    [Authorization(RequiredPrivilegeType = "ADMIN")]
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;

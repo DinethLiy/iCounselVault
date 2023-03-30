@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace icounselvault.Controllers.SuperAdmin
 {
+    [Authorization(RequiredPrivilegeType = "SUPER_ADMIN")]
     public class ManageAdminsController : Controller
     {
         private readonly AppDbContext _context;

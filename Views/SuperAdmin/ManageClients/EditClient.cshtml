@@ -1,7 +1,8 @@
 ﻿@using icounselvault.Utility
 @{
     ViewData["Title"] = "Edit Client";
-    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+    dynamic? layoutPath = TempData["layout"];
+    Layout = layoutPath;
     dynamic? selectedClient = TempData["selectedClient"];
 }
 <body>

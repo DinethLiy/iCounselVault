@@ -1,13 +1,16 @@
 ﻿using icounselvault.Models.Auth;
 using icounselvault.Models.Profiles;
 using icounselvault.Utility;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using Authorization = icounselvault.Utility.Auth.Authorization;
 
 namespace icounselvault.Controllers.Client
 {
+    [Authorization(RequiredPrivilegeType = "CLIENT")]
     public class ClientProfileController : Controller
     {
         private readonly AppDbContext _context;

@@ -19,8 +19,7 @@ namespace icounselvault.Models.Profiles
         public DateTime DOB { get; set; }
         [Required]
         public string GENDER { get; set; }
-        [Required]
-        public string NIC { get; set; }
+        public string? NIC { get; set; }
         public string? ADDRESS { get; set; }
         [Required]
         public string COUNTRY { get; set; }

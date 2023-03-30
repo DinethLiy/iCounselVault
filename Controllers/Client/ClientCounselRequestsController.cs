@@ -1,12 +1,14 @@
 ﻿using icounselvault.Models.Counseling;
 using icounselvault.Models.Profiles;
 using icounselvault.Utility;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace icounselvault.Controllers.Client
 {
+    [Authorization(RequiredPrivilegeType = "CLIENT")]
     public class ClientCounselRequestsController : Controller
     {
         private readonly AppDbContext _context;
@@ -103,7 +105,11 @@ namespace icounselvault.Controllers.Client
             var counselor = _context.COUNSELOR
                 .Where(co => co.COUNSELOR_ID == counselorId)
                 .FirstOrDefault();
+            var counselorExperience = _context.COUNSELOR_EXPERIENCE
+                .Where(coe => coe.counselor == counselor)
+                .FirstOrDefault();
             TempData["counselor"] = counselor;
+            TempData["counselorExperience"] = counselorExperience;
         }
     }
 }

@@ -21,7 +21,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="CounselorDashboard" asp-action="Index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="CounselorProfile" asp-action="Index">
                 <div class="sidebar-brand-icon">
                     <img src="~/img/logo-high-res-transparent-white.png" width="60" height="60" class="d-inline-block align-top" alt="">
                 </div>
@@ -33,31 +33,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" asp-controller="CounselorDashboard" asp-action="Index">
+                <a class="nav-link" asp-controller="CounselorProfile" asp-action="Index">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Counseling
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="CounselorDashboard" asp-action="ShowCounselRequests">
-                    <i class="fas fa-business-time fa-fw me-3"></i>
-                    <span>Counsel Requests</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="CounselorDashboard" asp-action="ShowCounselorGuidanceHistory">
-                    <i class="fas fa-address-card fa-fw me-3"></i>
-                    <span>Counseling History</span>
                 </a>
             </li>
 
@@ -230,18 +208,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Counselor</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Counselor (User only)</span>
                                 <img class="img-profile rounded-circle"
                                      src="~/img/StylePack/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" asp-controller="CounselorDashboard" asp-action="ShowCounselorProfile">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout

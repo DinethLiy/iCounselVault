@@ -1,10 +1,12 @@
 ﻿using icounselvault.Models.Counseling;
 using icounselvault.Utility;
+using icounselvault.Utility.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace icounselvault.Controllers.Admin
 {
+    [Authorization(RequiredPrivilegeType = "ADMIN")]
     public class ManageInsertRequestsController : Controller
     {
         private readonly AppDbContext _context;

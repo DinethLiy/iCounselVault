@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace icounselvault.Controllers.Counselor
 {
+    [Authorization(RequiredPrivilegeType = "COUNSELOR")]
     public class CounselorProfileController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,7 +19,7 @@ namespace icounselvault.Controllers.Counselor
         }
 
         [HttpPost]
-        public IActionResult AddCounselor(string Name, string DateOfBirth, string Gender, string NIC, string Address, string Country, string Contact, string Email)
+        public IActionResult AddCounselor(string Name, string DateOfBirth, string Gender, string Address, string Country, string Contact, string Email)
         {
             var token = Request.Cookies["access_token"];
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -34,7 +35,6 @@ namespace icounselvault.Controllers.Counselor
                 NAME = Name,
                 DOB = DateTime.Parse(DateOfBirth),
                 GENDER = Gender,
-                NIC = NIC,
                 ADDRESS = Address,
                 COUNTRY = Country,
                 CONTACT_NUM = Contact,
@@ -54,7 +54,7 @@ namespace icounselvault.Controllers.Counselor
             return View("../../Views/Counselor/CounselorProfile/ViewCounselorProfile");
         }
 
-        public IActionResult ShowEditCounselorProfile()
+        public IActionResult Index()
         {
             SetTempDataForCounselorProfile();
             return View("../../Views/Counselor/CounselorProfile/EditCounselorProfile");

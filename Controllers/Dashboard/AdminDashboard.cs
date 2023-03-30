@@ -1,29 +1,33 @@
-﻿using icounselvault.Utility;
+﻿using icounselvault.Business.Interfaces.Dashboard;
+using icounselvault.Utility;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace icounselvault.Controllers.Dashboard
 {
     public class AdminDashboard : Controller
     {
-        private readonly AppDbContext _context;
-        public AdminDashboard(AppDbContext context)
+        private readonly IAdminDashboardService _adminDashboardService;
+
+        public AdminDashboard(IAdminDashboardService adminDashboardService)
         {
-            _context = context;
+            _adminDashboardService = adminDashboardService;
         }
 
         public IActionResult Index()
         {
+            SetTempDataForAdminDashboard();
             return View("../../Views/Dashboard/AdminDashboard");
         }
 
         public RedirectToActionResult ShowCounselors()
         {
-            return RedirectToAction("ViewCounselors", "ManageCounselors");
+            return RedirectToAction("AdminViewCounselors", "ManageCounselors");
         }
 
         public RedirectToActionResult ShowClients()
         {
-            return RedirectToAction("ViewClients", "ManageClients");
+            return RedirectToAction("AdminViewClients", "ManageClients");
         }
         
         public RedirectToActionResult ShowInsertRequests()
@@ -59,6 +63,15 @@ namespace icounselvault.Controllers.Dashboard
         public RedirectToActionResult ShowClientActivityReport()
         {
             return RedirectToAction("ViewClientActivityReport", "Report");
+        }
+
+        private void SetTempDataForAdminDashboard() 
+        {
+            ArrayList resultList = _adminDashboardService.GetDataForAdminDashboard();
+            TempData["pendingDataInsertRequests"] = (string)resultList[0];
+            TempData["pendingCounselRequests"] = (string)resultList[1];
+            TempData["clientCount"] = (string)resultList[2];
+            TempData["counselorCount"] = (string)resultList[3];
         }
     }
 }

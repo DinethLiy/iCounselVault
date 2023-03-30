@@ -1,11 +1,92 @@
 ﻿@{
     ViewData["Title"] = "Admin";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    dynamic? pendingDataInsertRequests = TempData["pendingDataInsertRequests"];
+    dynamic? pendingCounselRequests = TempData["pendingCounselRequests"];
+    dynamic? clientCount = TempData["clientCount"];
+    dynamic? counselorCount = TempData["counselorCount"];
 }
 <body>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+        <h1 class="h3 mb-0 text-gray-800">Welcome to iCounselVault, Admin</h1>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="row">
+        <!-- Data Insert Requests card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Pending Data Insert Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@pendingDataInsertRequests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Counsel Requests card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Pending Counsel Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@pendingCounselRequests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Clients card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Clients
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@clientCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Counselors card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Counselors
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@counselorCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Navigation Card -->
@@ -16,12 +97,14 @@
             </div>
             <div class="card-body">
                 <!-- Navigation Buttons -->
-                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="SuperAdminDashboard" asp-action="ShowCounselors">
+                <h6 class="h5 mb-0 text-gray-800">User Management</h6><br>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminDashboard" asp-action="ShowCounselors">
                     <i class="fas fa-user-tie fa-fw me-3"></i>Counselors
                 </a>
-                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="SuperAdminDashboard" asp-action="ShowClients">
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminDashboard" asp-action="ShowClients">
                     <i class="fas fa-users fa-fw me-3"></i>Clients
-                </a>
+                </a><br><br>
+                <h6 class="h5 mb-0 text-gray-800">Request Management</h6><br>
                 <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" asp-controller="AdminDashboard" asp-action="ShowInsertRequests">
                     <i class="fas fa-exchange-alt fa-fw me-3"></i>Guidance Insert Requests
                 </a>

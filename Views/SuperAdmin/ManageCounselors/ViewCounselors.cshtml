@@ -1,16 +1,22 @@
 ﻿@model IEnumerable<icounselvault.Models.Profiles.Counselor>
 @{
     ViewData["Title"] = "View Counselors";
-    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+    dynamic? layoutPath = TempData["layout"];
+    Layout = layoutPath;
     int counselorID = 0;
 }
 <body>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Manage Counselors</h1>
-        <a class="btn btn-success btn-icon-split" asp-action="ShowAddEditCounselorUser" asp-route-userId=-1 asp-route-encryptedPassword="-1" asp-controller="ManageCounselors">
-            <span class="text">Create Counselor User</span>
-        </a>
+        @if (layoutPath == "../../Views/Shared/_SuperAdminLayout")
+        {
+            <a class="btn btn-success btn-icon-split" asp-action="SuperAdminShowAddEditCounselorUser" asp-route-userId=-1 asp-route-encryptedPassword="-1" asp-controller="ManageCounselors"><span class="text">Create Counselor User</span></a>
+        }
+        else
+        {
+            <a class="btn btn-success btn-icon-split" asp-action="AdminShowAddEditCounselorUser" asp-route-userId=-1 asp-route-encryptedPassword="-1" asp-controller="ManageCounselors"><span class="text">Create Counselor User</span></a>
+        }
     </div>
 
     <div class="col">
@@ -28,7 +34,6 @@
                             <th>Name</th>
                             <th>DOB</th>
                             <th>Gender</th>
-                            <th>NIC</th>
                             <th>Address</th>
                             <th>Country</th>
                             <th>Contact</th>
@@ -47,7 +52,6 @@
                                 <td>@counselor.NAME</td>
                                 <td>@counselor.DOB</td>
                                 <td>@counselor.GENDER</td>
-                                <td>@counselor.NIC</td>
                                 <td>@counselor.ADDRESS</td>
                                 <td>@counselor.COUNTRY</td>
                                 <td>@counselor.CONTACT_NUM</td>
@@ -55,9 +59,14 @@
                                 <td>@counselor.COUNSELOR_STATUS</td>
                                 <td>
                                     <center>
-                                        <a class="btn btn-info btn-icon-split" asp-action="ShowEditCounselor" asp-route-counselorId=@counselor.COUNSELOR_ID asp-controller="ManageCounselors">
-                                            <span class="text">Edit</span>
-                                        </a>
+                                        @if (layoutPath == "../../Views/Shared/_SuperAdminLayout")
+                                        {
+                                            <a class="btn btn-info btn-icon-split" asp-action="SuperAdminShowEditCounselor" asp-route-counselorId=@counselor.COUNSELOR_ID asp-controller="ManageCounselors"><span class="text">Edit</span></a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-info btn-icon-split" asp-action="AdminShowEditCounselor" asp-route-counselorId=@counselor.COUNSELOR_ID asp-controller="ManageCounselors"><span class="text">Edit</span></a>
+                                        }
                                     </center>
                                 </td>
                             </tr>
