@@ -30,7 +30,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Guidance Advice</label>
-                        <input type="text" name="advice" id="advice" placeholder="Guidance Advice in brief" class="form-control">
+                        <input type="text" name="advice" id="advice" placeholder="Guidance Advice in brief" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Satisfaction with the Given Advice</label>
@@ -43,11 +43,15 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Recieved Date</label>
-                        <input type="date" name="createdDate" id="createdDate" placeholder="Recieved Date" class="form-control">
+                        <input type="date" name="createdDate" id="createdDate" placeholder="Recieved Date" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        createdDate.max = new Date().toLocaleDateString('fr-ca')
+    </script>
 </body>

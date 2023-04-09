@@ -44,8 +44,9 @@ namespace icounselvault.Controllers.SuperAdmin
         }
 
         [HttpPost]
-        public IActionResult EditClientStatus(string clientId, string status)
+        public IActionResult EditClientStatus(string clientId, string status, string layoutPath)
         {
+            TempData["layout"] = layoutPath;
             var foundCounselor = _context.CLIENT
                 .Where(cl => cl.CLIENT_ID == int.Parse(clientId))
                 .FirstOrDefault();

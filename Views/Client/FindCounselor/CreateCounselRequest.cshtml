@@ -59,11 +59,11 @@
                     <input type="hidden" name="counselorId" id="counselorId" value="@counselor.COUNSELOR_ID">
                     <div class="mb-3">
                         <label class="form-label">Start Date of Possible Date Range for Counseling</label>
-                        <input type="date" name="StartDate" id="StartDate" class="form-control">
+                        <input type="date" name="StartDate" id="StartDate" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">End Date of Possible Date Range for Counseling</label>
-                        <input type="date" name="EndDate" id="EndDate" class="form-control">
+                        <input type="date" name="EndDate" id="EndDate" class="form-control" required>
                     </div>
                     <label class="form-label">You may provide the same date as the Starting Date and Ending Date</label><br>
                     <button type="submit" class="btn btn-primary">Create</button>
@@ -71,4 +71,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        StartDate.min = new Date().toLocaleDateString('fr-ca')
+        EndDate.min = new Date().toLocaleDateString('fr-ca')
+    </script>
 </body>

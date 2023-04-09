@@ -108,10 +108,6 @@ else
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
-                            <input type="text" name="Gender" id="Gender" placeholder="Your Gender.." class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Gender</label>
                             <select name="Gender" id="Gender" class="custom-select">
                                 @foreach (var gender in Enum.GetValues(typeof(AppConstants.Genders)))
                                 {
@@ -126,7 +122,6 @@ else
                         <div class="mb-3">
                             <label class="form-label">Country</label>
                             <select name="Country" id="Country" class="custom-select">
-                                <option value="all" selected>All</option>
                                 @foreach (var country in Enum.GetValues(typeof(AppConstants.Countries)))
                                 {
                                     <option value="@country">@country</option>

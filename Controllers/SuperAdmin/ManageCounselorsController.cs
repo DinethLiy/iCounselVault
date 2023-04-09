@@ -62,8 +62,9 @@ namespace icounselvault.Controllers.SuperAdmin
         }
 
         [HttpPost]
-        public IActionResult AddCounselorUser(string username, string password, string confirmPassword)
+        public IActionResult AddCounselorUser(string username, string password, string confirmPassword, string layoutPath)
         {
+            TempData["layout"] = layoutPath;
             EncryptDecryptText encryptDecryptText = new();
             if (username != null && password != null && confirmPassword == password)
             {
@@ -86,8 +87,9 @@ namespace icounselvault.Controllers.SuperAdmin
         }
 
         [HttpPost]
-        public IActionResult EditCounselorUser(string userId, string username, string password, string confirmPassword, string status)
+        public IActionResult EditCounselorUser(string userId, string username, string password, string confirmPassword, string status, string layoutPath)
         {
+            TempData["layout"] = layoutPath;
             EncryptDecryptText encryptDecryptText = new();
             var foundCounselorUser = _context.USER
                         .Where(u => u.USER_ID == int.Parse(userId))
@@ -111,8 +113,9 @@ namespace icounselvault.Controllers.SuperAdmin
         }
 
         [HttpPost]
-        public IActionResult EditCounselorStatus(string counselorId, string status)
+        public IActionResult EditCounselorStatus(string counselorId, string status, string layoutPath)
         {
+            TempData["layout"] = layoutPath;
             var foundCounselor = _context.COUNSELOR
                 .Where(co => co.COUNSELOR_ID == int.Parse(counselorId))
                 .FirstOrDefault();

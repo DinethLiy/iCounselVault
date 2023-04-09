@@ -379,7 +379,7 @@ namespace icounselvault.Business.Services.Admin
                 }
                 else
                 {
-                    document.Add(new Paragraph("No Counselor data for the given parameters").SetFontSize(24));
+                    document.Add(new Paragraph("No Client data for the given parameters").SetFontSize(24));
                 }
 
                 document.Close();

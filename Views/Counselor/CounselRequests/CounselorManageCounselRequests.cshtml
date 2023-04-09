@@ -49,9 +49,25 @@
                         <label class="form-label">Remark (Optional)</label>
                         <input type="text" name="Remark" id="Remark" placeholder="Say Something About This Request..." class="form-control">
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Please Enter the Reason for Rejection in the Remark field if you Reject the Request</label>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        const statusInput = document.getElementById("Status");
+        const remarkInput = document.getElementById("Remark");
+
+        statusInput.addEventListener("input", function () {
+            if (statusInput.value === "REJECTED") {
+                remarkInput.setAttribute("required", "");
+            } else {
+                remarkInput.removeAttribute("required");
+            }
+        });
+    </script>
 </body>

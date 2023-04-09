@@ -51,4 +51,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const statusInput = document.getElementById("status");
+        const remarkInput = document.getElementById("remark");
+
+        statusInput.addEventListener("input", function () {
+            if (statusInput.value === "REJECTED") {
+                remarkInput.setAttribute("required", "");
+            } else {
+                remarkInput.removeAttribute("required");
+            }
+        });
+    </script>
 </body>
